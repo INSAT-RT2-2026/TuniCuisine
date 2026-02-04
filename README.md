@@ -27,7 +27,7 @@ At this moment, we are mainly working on:
 
 ---
 
-## 🧱 Planned Tech Stack
+##  Planned Tech Stack
 
 We will build the project step by step. Technologies will be added gradually during the course.
 
@@ -45,7 +45,7 @@ We will build the project step by step. Technologies will be added gradually dur
 
 ### Phase 3 – Database (Planned)
 
-- **PostgreSQL** – Store recipes, ingredients and regions in tables
+- Store recipes, ingredients and regions in tables
 - Connect PHP pages to the database to display real data
 
 ### Phase 4 – Symfony Framework (Planned)
@@ -56,7 +56,7 @@ We will build the project step by step. Technologies will be added gradually dur
 
 ---
 
-## 📄 Planned Pages
+##  Planned Pages
 
 These pages are planned but not all are implemented yet:
 
@@ -85,21 +85,7 @@ These pages are planned but not all are implemented yet:
 
 ---
 
-## 🎨 Design & Tunisian Style (Planned)
-
-Even in the early stage, we want the site to feel Tunisian:
-
-- **Colors**
-  - Tunisian red, beige / sand, and dark brown for text
-- **Decorations**
-  - Icons like **chachia**, couscous pot, harissa, traditional doors
-- **Layout**
-  - Clean and simple cards for recipes
-  - Clear navigation bar with links to the main pages
-
----
-
-## 👥 Team
+##  Team
 
 TuniCuisine is developed by RT2 students as part of a web development course.
 
@@ -116,10 +102,7 @@ Planned roles:
 - Database & data modeling
 ---
 
-## 🚧 Project Status
-
-- ✅ Idea and main features defined  
-- ✅ Initial design inspiration chosen (Tunisian theme)  
+## 🚧 Project Status 
 - ⏳ HTML/CSS structure in progress  
 - ⏳ JavaScript interactions to be added  
 - ⏳ Backend (PHP, Symfony)   
