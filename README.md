@@ -70,14 +70,6 @@ A **“Regions”** section to travel through Tunisia via food:
   - How to control spiciness
   - How to prepare a typical **Tunisian menu** for guests
 - Can be extended into a **blog-like** experience.
-
-### 6. Ask the Chef (Future Chatbot)
-
-- Planned **chatbot assistant**:
-  - Answer questions like “How much harissa should I use?”  
-  - Suggest recipes based on available ingredients  
-  - Help adapt recipes (e.g. vegetarian version)
-
 ---
 
 ## 🧱 Tech Stack & Project Phases
