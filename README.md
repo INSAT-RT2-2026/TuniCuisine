@@ -493,7 +493,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **GitHub**: [INSAT-RT2-2026](https://github.com/INSAT-RT2-2026)
-- **Email**: contact@tunicsine.com
+- **Email**: contact@tunicuisine.com
 - **Website**: [Coming Soon]
 
 ---
