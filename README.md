@@ -3,11 +3,11 @@
 Discover authentic Tunisian recipes from every corner of Tunisia – from the streets of Tunis to the shores of Djerba.  
 **TuniCuisine** is a university web project that will present traditional Tunisian meals, their ingredients and preparation steps, in a modern and simple website inspired by local colors and symbols (chachia, Tunisian doors, mosaics, couscous pots, etc.).
 
-> ⚠️ **Status:** Early stage – we are starting the project and the UI, backend and database are still in progress.
+>  **Status:** Early stage – we are starting the project and the UI, backend and database are still in progress.
 
 ---
 
-## 🍲 Project Idea
+## Project Idea
 
 TuniCuisine will be a **meal recipe web application** focused on Tunisian food.
 
