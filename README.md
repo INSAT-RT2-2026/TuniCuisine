@@ -225,32 +225,6 @@ We follow **industry-inspired practices**:
    git clone https://github.com/INSAT-RT2-2026/TuniCuisine.git
    cd TuniCuisine
    ```
-
-2. **Install PHP & Composer dependencies (Symfony phase)**
-   ```bash
-   composer install
-   ```
-
-3. **Configure environment**
-   - Copy `.env` to `.env.local`
-   - Set your PostgreSQL connection string:
-     ```env
-     DATABASE_URL="postgresql://user:password@127.0.0.1:5432/tunicuisine?serverVersion=16&charset=utf8"
-     ```
-
-4. **Run database migrations (when entities are ready)**
-   ```bash
-   php bin/console doctrine:migrations:migrate
-   ```
-
-5. **Start the Symfony server**
-   ```bash
-   symfony server:start
-   ```
-   Then open [http://localhost:8000](http://localhost:8000) in your browser.
-
----
-
 ## 👨‍🍳 Contributors
 
 - Team of RT2 students – Web Development Project
