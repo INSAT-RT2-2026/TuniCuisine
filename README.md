@@ -102,10 +102,10 @@ Planned roles:
 - Database & data modeling
 ---
 
-## 🚧 Project Status 
-- ⏳ HTML/CSS structure in progress  
-- ⏳ JavaScript interactions to be added  
-- ⏳ Backend (PHP, Symfony)   
+##  Project Status 
+-  HTML/CSS structure in progress  
+-  JavaScript interactions to be added  
+-  Backend (PHP, Symfony)   
 
 The README will be updated as soon as we add real pages, data and screenshots.
 
