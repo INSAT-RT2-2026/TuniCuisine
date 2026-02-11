@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red);"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Tunisian Cuisine</span>
+                    <span class="logo-subtitle">المطبخ التونسي</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#"><i class="fa-solid fa-utensils"></i> Recipes</a>
+                <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="#" class="nav-btn active"><i class="fa-solid fa-location-dot"></i> Regions</a>
+                <a href="#"><i class="fa-solid fa-leaf"></i> Ingredients</a>
+                <a href="#"><i class="fa-solid fa-book-open"></i> Cooking Tips</a>
+                <a href="#"><i class="fa-solid fa-comment"></i> Ask Chef</a>
+            </div>
+        </div>
+    </nav>
+    <section class="hero" style="background-image: url('images/Auswahl-tunesische-Gerichte-c-123rf-148026485_m.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-icon">
+                <i class="fa-solid fa-location-dot" style="color: #fff;"></i>
+            </div>
+            <h1>Regional Specialties</h1>
+            <p>Discover the unique culinary traditions of Tunisia's diverse regions</p>
+        </div>
+    </section>
+
+    <section class="intro text-center">
+        <div class="container">
+            <p>From the Mediterranean coast to the Sahara desert, each Tunisian region has developed its own culinary
+                identity influenced by local geography, history, and available ingredients.</p>
+        </div>
+    </section>
+    <section class="filters container">
+        <div class="filter-item">
+            <i class="fa-solid fa-water" style="color: var(--primary-red);"></i> <span>Coastal Region</span>
+        </div>
+        <div class="filter-item">
+            <i class="fa-solid fa-location-dot" style="color: var(--primary-red);"></i> <span>Capital/Urban</span>
+        </div>
+        <div class="filter-item">
+            <i class="fa-solid fa-tree" style="color: #8D6E63;"></i> <span>Desert/Oasis</span>
+        </div>
+    </section>
+
+    <section class="regions-grid container">
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Tunis</h2>
+                <i class="fa-solid fa-location-dot" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Coastal capital with access to both Mediterranean seafood and inland ingredients
+            </p>
+            <p class="card-desc">The capital and largest city, Tunis is the culinary melting pot of Tunisia. Here you'll
+                find traditional dishes alongside French-influenced cafés and restaurants.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Couscous Royal</span>
+                    <span class="tag">Brik à l'Oeuf</span>
+                    <span class="tag">Lablabi</span>
+                    <span class="tag">Fricassé</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>The medina of Tunis is a UNESCO World Heritage site with countless food stalls and traditional
+                    eateries</p>
+            </div>
+        </div>
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Sfax</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Major Mediterranean port city surrounded by olive groves</p>
+            <p class="card-desc">Tunisia's second-largest city and an important port. Sfax is known for its olive oil
+                production and exceptional seafood dishes.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Poisson Complet</span>
+                    <span class="tag">Sfaxian Couscous</span>
+                    <span class="tag">Grilled Fish</span>
+                    <span class="tag">Olive Oil Dishes</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Sfax produces some of the world's finest olive oil, with trees dating back centuries</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Sousse</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Beautiful Mediterranean coastline with fertile agricultural surroundings</p>
+            <p class="card-desc">A coastal city known as the "Pearl of the Sahel." Sousse combines beach resort culture
+                with authentic Tunisian culinary traditions.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Ojja Merguez</span>
+                    <span class="tag">Seafood Tagines</span>
+                    <span class="tag">Grilled Octopus</span>
+                    <span class="tag">Fish Couscous</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>The Sousse medina has ancient fortifications and traditional spice markets</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Kairouan</h2>
+                <i class="fa-solid fa-tree" style="color: #8D6E63;"></i>
+            </div>
+            <p class="card-subtitle">Inland city in the central plains, known for date palm oases</p>
+            <p class="card-desc">The fourth holiest city in Islam and the historical capital. Kairouan is famous for its
+                traditional sweets and pastries.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Makroudh</span>
+                    <span class="tag">Sweet Couscous</span>
+                    <span class="tag">Traditional Pastries</span>
+                    <span class="tag">Honey Desserts</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Makroudh from Kairouan is considered the finest in all of Tunisia</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Bizerte</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Strategic port at the northern tip where the Mediterranean meets Lake Bizerte</p>
+            <p class="card-desc">The northernmost city in Africa, Bizerte is a fishing port with strong seafood
+                traditions and French colonial influence.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Kafteji</span>
+                    <span class="tag">Fish Tajine</span>
+                    <span class="tag">Grilled Sardines</span>
+                    <span class="tag">Seafood Soups</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Bizerte's old port is one of the most picturesque in North Africa</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Gabès</h2>
+                <i class="fa-solid fa-tree" style="color: #8D6E63;"></i>
+            </div>
+            <p class="card-subtitle">Unique coastal oasis where the desert meets the Mediterranean</p>
+            <p class="card-desc">Known as the "Gateway to the Sahara," Gabès is famous for its coastal oasis, dates, and
+                spicy cuisine.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Chakchouka</span>
+                    <span class="tag">Date-based Dishes</span>
+                    <span class="tag">Spicy Stews</span>
+                    <span class="tag">Oasis Vegetables</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Gabès is one of the few places where you can see palm trees on the beach</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Djerba</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Island paradise with Mediterranean beaches and traditional agriculture</p>
+            <p class="card-desc">An island in the Gulf of Gabès, Djerba has a unique multicultural heritage reflected in
+                its distinctive cuisine.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Mloukhiya</span>
+                    <span class="tag">Fish Couscous</span>
+                    <span class="tag">Djerbian Couscous</span>
+                    <span class="tag">Seafood Specialties</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Djerba is home to one of the oldest Jewish communities in North Africa, influencing local cuisine</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Nabeul</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Fertile peninsula with citrus groves and proximity to the sea</p>
+            <p class="card-desc">The capital of the Cap Bon peninsula, famous for pottery, citrus fruits, and harissa
+                production.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Mechouia Salad</span>
+                    <span class="tag">Harissa-based Dishes</span>
+                    <span class="tag">Citrus Desserts</span>
+                    <span class="tag">Pottery-cooked Meals</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Nabeul produces much of Tunisia's famous harissa and is known for ceramic tagine pots</p>
+            </div>
+        </div>
+
+        <div class="region-card">
+            <div class="card-header">
+                <h2>Monastir</h2>
+                <i class="fa-solid fa-water" style="color: var(--primary-red);"></i>
+            </div>
+            <p class="card-subtitle">Beautiful beaches along the Sahel coast</p>
+            <p class="card-desc">A coastal resort town with a blend of tourism and traditional fishing culture,
+                birthplace of Tunisia's first president.</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    <span class="tag">Kamounia</span>
+                    <span class="tag">Grilled Fish</span>
+                    <span class="tag">Seafood Mezze</span>
+                    <span class="tag">Coastal Salads</span>
+                </div>
+            </div>
+            <div class="did-you-know">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>The ribat (fortress) of Monastir dates back to 796 AD and overlooks the fishing harbor</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="geography container">
+        <div class="geo-header">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Tunisia's Culinary Geography</h3>
+        </div>
+        <div class="geo-grid">
+            <div class="geo-item">
+                <h4>Northern Coast</h4>
+                <p>Mediterranean influences, abundant seafood, French colonial heritage, and Europe-facing trade routes.
+                </p>
+            </div>
+            <div class="geo-item">
+                <h4>Central Tunisia</h4>
+                <p>Traditional heartland with ancient cities, olive groves, agricultural plains, and preserved culinary
+                    heritage.</p>
+            </div>
+            <div class="geo-item">
+                <h4>Southern Regions</h4>
+                <p>Desert oases, date cultivation, spicier cuisine, and Berber influences with Saharan trade
+                    connections.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red);"></i>
+                    <span class="logo-title">Tunisian Recipes</span>
+                </div>
+                <p>Preserving and sharing the rich culinary heritage of Tunisia, one recipe at a time.</p>
+                <div class="socials">
+                    <i class="fa-brands fa-facebook" style="margin-right: 15px; color: #666;"></i>
+                    <i class="fa-brands fa-instagram" style="margin-right: 15px; color: #666;"></i>
+                    <i class="fa-brands fa-pinterest" style="color: #666;"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Popular Regions</h4>
+                <ul>
+                    <li>Tunis - Capital Classics</li>
+                    <li>Sfax - Coastal Delights</li>
+                    <li>Djerba - Island Specialties</li>
+                    <li>Kairouan - Traditional Sweets</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li>About Tunisian Cuisine</li>
+                    <li>Ingredient Glossary</li>
+                    <li>Cooking Tips & Techniques</li>
+                    <li>Ask the Chef</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Tunisian Recipes. Made with <i class="fa-solid fa-heart"
+                    style="color: var(--primary-red);"></i> for Tunisian cuisine lovers worldwide.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
