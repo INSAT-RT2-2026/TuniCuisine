@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tunisian Ingredients</title>
+  <link rel="stylesheet" href="style.css" />
+  <!--<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">-->
+</head>
+<body>
+     <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red);"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Tunisian Cuisine</span>
+                    <span class="logo-subtitle">المطبخ التونسي</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#"><i class="fa-solid fa-utensils"></i> Recipes</a>
+                <a href="#"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="#"><i class="fa-solid fa-location-dot"></i> Regions</a>
+                <a href="#" class="nav-btn active"><i class="fa-solid fa-leaf"></i> Ingredients</a>
+                <a href="#"><i class="fa-solid fa-book-open"></i> Cooking Tips</a>
+                <a href="#"><i class="fa-solid fa-comment"></i> Ask Chef</a>
+            </div>
+        </div>
+    </nav
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-icon">&#9752;</div>
+      <h1>Tunisian Ingredients</h1>
+      <p>Explore the essential spices, herbs, and ingredients that define Tunisian cooking.</p>
+    </div>
+  </header>
+
+  <!-- main -->
+  <main class="main-container">
+
+    <!-- search bar -->
+    <div class="search-bar-wrapper">
+      <div class="search-bar">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search ingredients..." />
+      </div>
+    </div>
+
+    <!-- categorie filters  -->
+    <div class="categories">
+      <span class="cat-label">Categories</span>
+      <button class="cat-btn active" data-cat="All">All</button>
+      <button class="cat-btn" data-cat="Spices & Condiments">Spices & Condiments</button>
+      <button class="cat-btn" data-cat="Meats & Proteins">Meats & Proteins</button>
+      <button class="cat-btn" data-cat="Grains & Pastry">Grains & Pastry</button>
+      <button class="cat-btn" data-cat="Fruits & Vegetables">Fruits & Vegetables</button>
+      <button class="cat-btn" data-cat="Oils & Fats">Oils & Fats</button>
+      <button class="cat-btn" data-cat="Legumes">Legumes</button>
+      <button class="cat-btn" data-cat="Pickles & Preserves">Pickles & Preserves</button>
+      <button class="cat-btn" data-cat="Aromatics">Aromatics</button>
+    </div>
+
+    <!-- count  -->
+    <p class="result-count" id="resultCount">12 ingredients found</p>
+
+    <!-- cards grid  -->
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- Harissa -->
+      <div class="card" data-category="Spices & Condiments" data-name="harissa">
+        <div class="card-img" style="background-image: url('https://salimaskitchen.com/wp-content/uploads/2022/07/Homemade-Harissa-A-Moroccan-Cooking-Staple-Salimas-Kitchen-12.jpg')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Harissa </h2>
+          <p class="card-subtitle">Chili & Oil</p>
+          <span class="badge badge-spice">Spices & Condiments</span>
+          <p class="card-desc">The soul of Tunisian cuisine. A fiery red paste made from hot chili peppers blended with garlic, olive oil, caraway, and coriander. Foundational to almost every Tunisian meal.</p>
+          <div class="card-tags">
+            <span class="tag">Spreads</span>
+            <span class="tag">Marinades</span>
+            <span class="tag">Soup seasoning</span>
+            <span class="tag">Sandwich filling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabil -->
+      <div class="card" data-category="Spices & Condiments" data-name="tabil">
+        <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KDBjrrq0roVqDz-yPFAjaaESCXGERmu9va2jFmFb6yssNIpg5piLTqFfZhRtJGVOZ0z6ZNkjYZKDGKo2hL4jdh86R36eXVLvO8Ulxv_rig&s=10')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Tabil</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-spice">Spices & Condiments</span>
+          <p class="card-desc">A unique Tunisian spice blend combining coriander seeds, caraway, garlic powder, dried chili peppers. The name means "seasoning" in Tunisian dialect.</p>
+          <div class="card-tags">
+            <span class="tag">Meat dishes</span>
+            <span class="tag">Stews</span>
+            <span class="tag">Egg dishes</span>
+            <span class="tag">Vegetables</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Olive Oil -->
+      <div class="card" data-category="Oils & Fats" data-name="olive oil">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Olive Oil</h2>
+          <p class="card-subtitle">Liquid Gold</p>
+          <span class="badge badge-oil">Oils & Fats</span>
+          <p class="card-desc">Tunisia is one of the world's biggest producers of high quality olive oil. Used prominently in cooking, dressing, and as a finishing oil in Tunisian cuisine.</p>
+          <div class="card-tags">
+            <span class="tag">Cooking</span>
+            <span class="tag">Salad dressings</span>
+            <span class="tag">Marinades</span>
+            <span class="tag">Dipping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caraway Seeds -->
+      <div class="card" data-category="Spices & Condiments" data-name="caraway seeds">
+        <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbR9PZaQcBwWuaoyWRhSQSfl5r_uutdW8Y5Ff4Zhefl3BhyMILcJAjFHK_Lb5e6LrPnXTwNBfVcnpt96VKAnNJcBG8nGfUolqBdpIvpg&s=10')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Caraway Seeds</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-spice">Spices & Condiments</span>
+          <p class="card-desc">Aromatic seeds used in distinctly warm, slightly sweet flavour. Caraway is a signature spice in many Tunisian dishes, especially soups and stews.</p>
+          <div class="card-tags">
+            <span class="tag">Lablabi soup</span>
+            <span class="tag">Couscous</span>
+            <span class="tag">Bread</span>
+            <span class="tag">Vegetable dishes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Merguez -->
+      <div class="card" data-category="Meats & Proteins" data-name="merguez">
+        <div class="card-img" style="background-image: url('https://i.ytimg.com/vi/4iWjJI-pCgI/maxresdefault.jpg')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Merguez</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-meat">Meats & Proteins</span>
+          <p class="card-desc">Spicy North African lamb or beef sausages flavoured with harissa, tabil, and aromatic spices. A staple in Tunisian grills and stews.</p>
+          <div class="card-tags">
+            <span class="tag">Grilling</span>
+            <span class="tag">Tajines</span>
+            <span class="tag">Couscous topping</span>
+            <span class="tag">Sandwiches</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dates -->
+      <div class="card" data-category="Fruits & Vegetables" data-name="dates">
+        <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdSHPSjPWmGmOT3oL_uhbvmF5YdVN_C9_zOA&s')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Dates</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-fruit">Fruits & Vegetables</span>
+          <p class="card-desc">Tunisia grows over 100 varieties of dates. They're eaten fresh, stuffed with almonds, or used in sweet dishes. Deglet Nour is the most famous variety.</p>
+          <div class="card-tags">
+            <span class="tag">Desserts</span>
+            <span class="tag">Makroudh filling</span>
+            <span class="tag">Snacks</span>
+            <span class="tag">Ramadan Iftar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Malsouka -->
+      <div class="card" data-category="Grains & Pastry" data-name="malsouka">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Malsouka</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-grain">Grains & Pastry</span>
+          <p class="card-desc">Ultra-thin pastry sheets similar to phyllo, used to wrap fillings for making brik and other Tunisian pastries. Requires skill to make by hand.</p>
+          <div class="card-tags">
+            <span class="tag">Brik</span>
+            <span class="tag">Tajines</span>
+            <span class="tag">Basmah</span>
+            <span class="tag">Wrapped dishes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chickpeas -->
+      <div class="card" data-category="Legumes" data-name="chickpeas">
+        <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrYOnr2vO_9tvNcJMJKdEGML-rtqp3oPv1xA&s')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Chickpeas</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-legume">Legumes</span>
+          <p class="card-desc">A cornerstone of Tunisian cuisine, chickpeas are used extensively in the popular street food lablabi, couscous, and salads throughout the country.</p>
+          <div class="card-tags">
+            <span class="tag">Lablabi</span>
+            <span class="tag">Couscous</span>
+            <span class="tag">Salads</span>
+            <span class="tag">Snacks</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coriander -->
+      <div class="card" data-category="Spices & Condiments" data-name="coriander">
+        <div class="card-img" style="background-image: url('https://malekicommercialco.com/wp-content/uploads/2020/01/a1.jpg')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Coriander</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-spice">Spices & Condiments</span>
+          <p class="card-desc">Both the fresh leaves and dried seeds are used extensively. The seed variety is a key component in tabil spice blend, while fresh coriander garnishes many dishes.</p>
+          <div class="card-tags">
+            <span class="tag">Tabil blend</span>
+            <span class="tag">Fresh garnish</span>
+            <span class="tag">Marinades</span>
+            <span class="tag">Stews</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semolina -->
+      <div class="card" data-category="Grains & Pastry" data-name="semolina">
+        <div class="card-img" style="background-image: url('https://cdn.salla.sa/KjBPn/3dyQ3CaD0J9J12UTPLBR3FdV4ZuClUj2TTZvFpop.jpg')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Semolina</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-grain">Grains & Pastry</span>
+          <p class="card-desc">The foundational grain used to make couscous, the national dish. Fine semolina is also used to bake traditional sweet and savoury Tunisian breads and pastries.</p>
+          <div class="card-tags">
+            <span class="tag">Couscous</span>
+            <span class="tag">Makroudh</span>
+            <span class="tag">Breads</span>
+            <span class="tag">Desserts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preserved Lemons -->
+      <div class="card" data-category="Pickles & Preserves" data-name="preserved lemons">
+        <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxhCcuWa_Kfp1Qm9i09PFWKbPWJc6psBOQLA&s')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Preserved Lemons</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-pickle">Pickles & Preserves</span>
+          <p class="card-desc">Whole lemons salt-cured over time, developing a mellow, fermented flavour with deep salty brightness. Used in tajines and couscous to brighten rich slow-cooked dishes.</p>
+          <div class="card-tags">
+            <span class="tag">Tajines</span>
+            <span class="tag">Salads</span>
+            <span class="tag">Chicken dishes</span>
+            <span class="tag">Fish preparations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orange Blossom Water -->
+      <div class="card" data-category="Aromatics" data-name="orange blossom water">
+        <div class="card-img" style="background-image: url('https://cdn.salla.sa/WlZpxV/6Y786T7hYxbPWKXvogTG4N5AcxEsDsP8gRSwXOfM.jpg')"></div>
+        <div class="card-body">
+          <h2 class="card-title">Orange Blossom Water</h2>
+          <p class="card-subtitle"></p>
+          <span class="badge badge-aromatic">Aromatics</span>
+          <p class="card-desc">A delicate floral water distilled from orange blossoms, cherished throughout Maghreb cuisine. The iconic aromatic used in pastries and sweets to impart a floral, perfumed essence.</p>
+          <div class="card-tags">
+            <span class="tag">Makroudh</span>
+            <span class="tag">Pastries</span>
+            <span class="tag">Sweet couscous</span>
+            <span class="tag">Sweets</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .cards-grid -->
+  </main>
+  <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red);"></i>
+                    <span class="logo-title">Tunisian Recipes</span>
+                </div>
+                <p>Preserving and sharing the rich culinary heritage of Tunisia, one recipe at a time.</p>
+                <div class="socials">
+                    <i class="fa-brands fa-facebook" style="margin-right: 15px; color: #666;"></i>
+                    <i class="fa-brands fa-instagram" style="margin-right: 15px; color: #666;"></i>
+                    <i class="fa-brands fa-pinterest" style="color: #666;"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Popular Regions</h4>
+                <ul>
+                    <li>Tunis - Capital Classics</li>
+                    <li>Sfax - Coastal Delights</li>
+                    <li>Djerba - Island Specialties</li>
+                    <li>Kairouan - Traditional Sweets</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li>About Tunisian Cuisine</li>
+                    <li>Ingredient Glossary</li>
+                    <li>Cooking Tips & Techniques</li>
+                    <li>Ask the Chef</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Tunisian Recipes. Made with <i class="fa-solid fa-heart"
+                    style="color: var(--primary-red);"></i> for Tunisian cuisine lovers worldwide.</p>
+        </div>
+    </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
