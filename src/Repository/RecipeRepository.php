@@ -24,11 +24,16 @@ class RecipeRepository extends ServiceEntityRepository
     public function search(string $query): array
     {
         return $this->createQueryBuilder('r')
+            ->distinct()
             ->leftJoin('r.region', 'region')
+            ->leftJoin('r.recipeIngredients', 'ri')
+            ->leftJoin('ri.ingredient', 'ingredient')
             ->where('r.name LIKE :query')
             ->orWhere('r.description LIKE :query')
             ->orWhere('region.name LIKE :query')
+            ->orWhere('ingredient.name LIKE :query')
             ->setParameter('query', '%'.$query.'%')
+            ->orderBy('r.name', 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -41,6 +46,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('r')
             ->where('r.region = :regionId')
             ->setParameter('regionId', $regionId)
+            ->orderBy('r.name', 'ASC')
             ->getQuery()
             ->getResult();
     }

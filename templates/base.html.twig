@@ -24,7 +24,7 @@
     {% set current_route = app.request.attributes.get('_route') %}
     <nav class="navbar">
         <div class="container navbar-content">
-            <div class="logo">
+            <a href="{{ path('app_home') }}" class="logo" style="text-decoration:none;color:inherit;">
                 <div class="logo-icon">
                     <i class="fa-solid fa-bowl-food" style="color: var(--primary-red)"></i>
                 </div>
@@ -32,9 +32,9 @@
                     <span class="logo-title">Tunisian Cuisine</span>
                     <span class="logo-subtitle">المطبخ التونسي</span>
                 </div>
-            </div>
+            </a>
             <div class="nav-links">
-                <a href="{{ path('app_recipes') }}" class="{{ current_route == 'app_recipes' or current_route == 'app_recipe_show' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-utensils"></i> Recipes</a>
+                <a href="{{ path('app_home') }}" class="{{ current_route == 'app_home' or current_route == 'app_recipe_show' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-utensils"></i> Recipes</a>
                 <a href="{{ path('app_about') }}" class="{{ current_route == 'app_about' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-circle-info"></i> About</a>
                 <a href="{{ path('app_regions') }}" class="{{ current_route == 'app_regions' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-location-dot"></i> Regions</a>
                 <a href="{{ path('app_ingredients') }}" class="{{ current_route == 'app_ingredients' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-leaf"></i> Ingredients</a>

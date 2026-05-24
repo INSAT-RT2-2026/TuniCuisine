@@ -1,73 +1,129 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tunisian Recipes{% endblock %}
+{% block title %}Tunisian Cuisine — Recipes{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/recipes.css') }}">
+{% endblock %}
 
 {% block body %}
-<section class="hero" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80');">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <div class="hero-icon">
-            <i class="fa-solid fa-utensils" style="color: #fff;"></i>
+<div class="recipes-page">
+    <header class="recipes-hero">
+        <div class="recipes-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1746274394124-141a1d1c5af3?w=1080&q=80');"></div>
+        <div class="recipes-hero-overlay"></div>
+        <div class="recipes-hero-pattern" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="tile-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                        <circle cx="40" cy="40" r="20" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+                        <circle cx="40" cy="40" r="10" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+                        <path d="M 40 20 L 40 60 M 20 40 L 60 40" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#tile-pattern)"/>
+            </svg>
         </div>
-        <h1>Tunisian Recipes</h1>
-        <p>Discover authentic dishes from every region of Tunisia</p>
-    </div>
-</section>
-
-<section class="intro text-center">
-    <div class="container">
-        <p>From the bustling markets of Tunis to the coastal kitchens of Sfax, explore the recipes that define Tunisian culinary heritage.</p>
-    </div>
-</section>
-
-<section class="filters container">
-    <form method="get" action="{{ path('app_recipes') }}" class="recipe-search-form">
-        <div class="search-bar-wrapper" style="margin-bottom: 16px;">
-            <div class="search-bar" style="max-width: 520px;">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" name="q" value="{{ query }}" placeholder="Search recipes by name, ingredient, or region..." />
-            </div>
-            <button type="submit" class="nav-btn" style="border: none; cursor: pointer;">
-                <i class="fa-solid fa-search"></i> Search
-            </button>
-        </div>
-        <div class="categories" style="justify-content: center;">
-            <span class="cat-label">Filter by Region</span>
-            <a href="{{ path('app_recipes') }}" class="cat-btn {{ selectedRegion == 0 ? 'active' : '' }}">All</a>
-            {% for region in regions %}
-                <a href="{{ path('app_recipes', {region: region.id}) }}" class="cat-btn {{ selectedRegion == region.id ? 'active' : '' }}">{{ region.name }}</a>
-            {% endfor %}
-        </div>
-    </form>
-</section>
-
-<section class="regions-grid container">
-    {% for recipe in recipes %}
-        <a href="{{ path('app_recipe_show', {id: recipe.id}) }}" class="region-card recipe-card" style="text-decoration: none; color: inherit;">
-            <div class="card-header">
-                <h2>{{ recipe.name }}</h2>
-                {% if recipe.region %}
-                    <i class="fa-solid fa-location-dot" style="color: var(--primary-red);"></i>
+        <div class="recipes-hero-content">
+            <div class="hero-icon"><i class="fa-solid fa-utensils"></i></div>
+            <h1>Tunisian Cuisine</h1>
+            <p class="hero-tagline">Discover authentic recipes from every corner of Tunisia — from the bustling streets of Tunis to the coastal beauty of Djerba</p>
+            <form class="recipes-search-form" method="get" action="{{ path('app_home') }}">
+                {% if selectedRegion > 0 %}
+                    <input type="hidden" name="region" value="{{ selectedRegion }}">
                 {% endif %}
-            </div>
-            {% if recipe.region %}
-                <p class="card-subtitle">{{ recipe.region.name }} — {{ recipe.region.subtitle ?? '' }}</p>
-            {% endif %}
-            <p class="card-desc">{{ recipe.description }}</p>
-            <div class="signature-dishes">
-                <h4><span>|</span> Details</h4>
-                <div class="tags">
-                    <span class="tag"><i class="fa-regular fa-clock"></i> {{ recipe.prepTime + recipe.cookTime }} min</span>
-                    <span class="tag"><i class="fa-solid fa-fire"></i> {{ recipe.difficulty }}</span>
-                    <span class="tag"><i class="fa-solid fa-user-group"></i> {{ recipe.servings }} people</span>
+                <div class="recipes-search-wrap">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input
+                        type="search"
+                        name="q"
+                        class="recipes-search-input"
+                        value="{{ query }}"
+                        placeholder="Search recipes, ingredients..."
+                        autocomplete="off"
+                    />
                 </div>
-            </div>
-        </a>
-    {% else %}
-        <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px;">
-            <i class="fa-solid fa-basket-shopping" style="font-size: 3rem; color: var(--border); margin-bottom: 16px; display: block;"></i>
-            <p style="font-family: var(--font-display); font-size: 1.3rem; color: var(--text-muted); font-style: italic;">No recipes found matching your search.</p>
+            </form>
         </div>
-    {% endfor %}
-</section>
+    </header>
+
+    <div class="recipes-region-bar">
+        <div class="container">
+            <nav class="recipes-region-tabs" aria-label="Filter by region">
+                <a href="{{ path('app_home', query ? {q: query} : {}) }}" class="recipes-region-tab {{ selectedRegion == 0 ? 'active' : '' }}">All</a>
+                {% for region in regions %}
+                    <a href="{{ path('app_home', query ? {region: region.id, q: query} : {region: region.id}) }}"
+                       class="recipes-region-tab {{ selectedRegion == region.id ? 'active' : '' }}">
+                        {{ region.name }}
+                    </a>
+                {% endfor %}
+            </nav>
+        </div>
+    </div>
+
+    <main class="recipes-main">
+        <div class="container">
+            <section id="recipes-favorites-section" class="recipes-favorites" hidden>
+                <h3><i class="fa-solid fa-heart"></i> Your Favorites <span class="recipes-count-badge" id="favorites-count">0</span></h3>
+                <div class="recipes-grid" id="favorites-grid"></div>
+            </section>
+
+            <div class="recipes-results-header">
+                <i class="fa-solid fa-location-dot"></i>
+                <h2>
+                    {% if selectedRegion > 0 %}
+                        {% for region in regions %}
+                            {% if region.id == selectedRegion %}Recipes from {{ region.name }}{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        All Recipes
+                    {% endif %}
+                </h2>
+                <span class="recipes-count-badge">{{ recipes|length }}</span>
+            </div>
+
+            {% if recipes|length > 0 %}
+                <div class="recipes-grid">
+                    {% for recipe in recipes %}
+                        <article class="recipe-card-wrap" data-recipe-id="{{ recipe.id }}">
+                            <button type="button" class="recipe-fav-btn" data-recipe-id="{{ recipe.id }}" aria-label="Add to favorites">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                            <a href="{{ path('app_recipe_show', {id: recipe.id}) }}" class="recipe-card">
+                                <div class="recipe-card-image">
+                                    {% set imgSrc = recipe_image(recipe) %}
+                                    <img src="{{ imgSrc starts with 'http' ? imgSrc : asset(imgSrc) }}" alt="{{ recipe.name }}" loading="lazy">
+                                    {% if recipe.difficulty %}
+                                        <span class="recipe-difficulty {{ recipe.difficulty|lower }}">{{ recipe.difficulty }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="recipe-card-body">
+                                    <h3>{{ recipe.name }}</h3>
+                                    <div class="recipe-card-badges">
+                                        {% if recipe.region %}
+                                            <span class="recipe-badge">{{ recipe.region.name }}</span>
+                                        {% endif %}
+                                        <span class="recipe-badge accent">{{ recipe.difficulty ?? 'Recipe' }}</span>
+                                    </div>
+                                    <p class="recipe-card-desc">{{ recipe.description }}</p>
+                                </div>
+                                <div class="recipe-card-footer">
+                                    <span><i class="fa-regular fa-clock"></i> {{ recipe.prepTime ?? 0 }}m prep</span>
+                                    <span><i class="fa-solid fa-fire-burner"></i> {{ recipe.cookTime ?? 0 }}m cook</span>
+                                    <span><i class="fa-solid fa-user-group"></i> {{ recipe.servings ?? '—' }}</span>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="recipes-empty">
+                    <i class="fa-solid fa-utensils"></i>
+                    <h3>No recipes found</h3>
+                    <p>Try adjusting your search or region filter.</p>
+                    <a href="{{ path('app_home') }}" class="recipes-region-tab active" style="display:inline-flex;margin-top:1rem;">View all recipes</a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</div>
 {% endblock %}
