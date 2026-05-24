@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tunisian Ingredients{% endblock %}
+
+{% block body %}
+<!-- HERO HEADER -->
+<header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-icon">&#9752;</div>
+        <h1>Tunisian Ingredients</h1>
+        <p>Explore the essential spices, herbs, and ingredients that define Tunisian cooking.</p>
+    </div>
+</header>
+
+<!-- main -->
+<main class="main-container">
+
+    <!-- search bar -->
+    <div class="search-bar-wrapper">
+        <div class="search-bar">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Search ingredients..." />
+        </div>
+    </div>
+
+    <!-- categorie filters  -->
+    <div class="categories">
+        <span class="cat-label">Categories</span>
+        <button class="cat-btn active" data-cat="All">All</button>
+        {% for category in categories %}
+            <button class="cat-btn" data-cat="{{ category }}">{{ category }}</button>
+        {% endfor %}
+    </div>
+
+    <!-- count  -->
+    <p class="result-count" id="resultCount">{{ ingredients|length }} ingredient{{ ingredients|length > 1 ? 's' : '' }} found</p>
+
+    <!-- cards grid  -->
+    <div class="cards-grid" id="cardsGrid">
+        {% for ingredient in ingredients %}
+            <div class="card" data-category="{{ ingredient.category }}" data-name="{{ ingredient.name|lower }}">
+                <div class="card-img" style="background-image: url('{{ ingredient.image }}')"></div>
+                <div class="card-body">
+                    <h2 class="card-title">{{ ingredient.name }}</h2>
+                    {% if ingredient.subtitle %}
+                        <p class="card-subtitle">{{ ingredient.subtitle }}</p>
+                    {% endif %}
+                    <span class="badge {{ ingredient.badgeClass ?? 'badge-spice' }}">{{ ingredient.category }}</span>
+                    <p class="card-desc">{{ ingredient.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div><!-- end .cards-grid -->
+</main>
+{% endblock %}

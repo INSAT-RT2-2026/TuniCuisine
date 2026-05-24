@@ -1,0 +1,512 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cooking Tips | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<!-- Hero Section -->
+<section class="hero hero-tips">
+    <video autoplay loop muted playsinline class="hero-video">
+        <source src="{{ asset('videos/Olive_Oil_Pouring_into_Stew.mp4') }}" type="video/mp4">
+    </video>
+    <canvas id="embers-canvas"></canvas>
+    <div class="hero-overlay">
+        <div class="hero-content reveal">
+            <div class="hero-icon-top">
+                <i class="fa-solid fa-kitchen-set"></i>
+            </div>
+            <h1>Cooking Tips & Techniques</h1>
+            <p class="hero-subtitle">
+                Master the secrets of authentic Tunisian cooking
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy-section">
+    <div class="container">
+        <div class="philosophy-scroll-track" id="philosophy-track">
+            <!-- Invisible Triggers -->
+            <div class="philosophy-triggers">
+                <div class="scroll-trigger" data-index="0"></div>
+                <div class="scroll-trigger" data-index="1"></div>
+                <div class="scroll-trigger" data-index="2"></div>
+                <div class="scroll-trigger" data-index="3"></div>
+            </div>
+
+            <!-- Sticky Container -->
+            <div class="philosophy-sticky-viewport">
+                <div class="philosophy-split-layout">
+
+                    <!-- Progress Bar -->
+                    <div class="phil-progress-container">
+                        <div class="phil-progress-fill" id="phil-progress"></div>
+                    </div>
+
+                    <!-- Left Index Column -->
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card active reveal" style="--delay: 0.1s" data-index="0" data-title="Spice Balance"
+                            data-tip="Tunisian cuisine is about the harmony of flavors, not just heat. Start with less harissa and adjust to taste.">
+                            <h3>Spice Balance</h3>
+                            <p>Harmony over heat.</p>
+                        </div>
+                        <div class="philosophy-card reveal" style="--delay: 0.2s" data-index="1" data-title="Low &amp; Slow"
+                            data-tip="Many Tunisian dishes benefit from slow cooking. Don't rush stews and tagines - let the flavors develop.">
+                            <h3>Low &amp; Slow</h3>
+                            <p>Patience yields depth.</p>
+                        </div>
+                        <div class="philosophy-card reveal" style="--delay: 0.3s" data-index="2" data-title="Fresh is Best"
+                            data-tip="Use fresh spices, herbs, and ingredients whenever possible. Quality olive oil makes a huge difference.">
+                            <h3>Fresh is Best</h3>
+                            <p>Pellucid ingredients.</p>
+                        </div>
+                        <div class="philosophy-card reveal" style="--delay: 0.4s" data-index="3" data-title="Traditional Tools"
+                            data-tip="A couscoussier and clay cooking vessels are investments that will improve your Tunisian cooking.">
+                            <h3>Traditional Tools</h3>
+                            <p>Authentic mechanics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Detail Reading Pane (Right Side) -->
+                    <div class="philosophy-detail-pane reveal" style="--delay: 0.5s">
+                        <!-- Animated Images -->
+                        <div class="crossfade-img-container">
+                            <img src="{{ asset('images/tunisian_spices_card_1774908995706.png') }}" class="xfade-img active" alt="Spice Balance"
+                                id="phil-img-0">
+                            <img src="{{ asset('images/tunisian_tagine_card_1774909007216.png') }}" class="xfade-img" alt="Low &amp; Slow"
+                                id="phil-img-1">
+                            <img src="{{ asset('images/tunisian_olive_oil_card_1774909024993.png') }}" class="xfade-img" alt="Fresh is Best"
+                                id="phil-img-2">
+                            <img src="{{ asset('images/tunisian_couscousier_card_1774909041333.png') }}" class="xfade-img" alt="Traditional Tools"
+                                id="phil-img-3">
+                        </div>
+
+                        <!-- Animated Text -->
+                        <div class="pane-text-content" id="phil-text-wrapper">
+                            <h3 class="pane-title" id="phil-title">Spice Balance</h3>
+                            <p class="pane-tip-text" id="phil-tip"><strong>The Tip:</strong> Tunisian cuisine is about the harmony
+                                of flavors, not just heat. Start with less harissa and adjust to taste.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Essential Techniques Accordion -->
+<section class="techniques-section">
+    <div class="container techniques-container">
+        <div class="section-badge reveal">
+            <div class="badge-line"></div>
+            <h2>Essential Techniques</h2>
+        </div>
+
+        <div class="masterclass-container reveal" style="--delay: 0.2s">
+            <nav class="masterclass-nav">
+                <div class="oil-drip-track">
+                    <div id="oil-drop"></div>
+                </div>
+                <button class="masterclass-tab active" data-target="pane-1">Spice Management & "qalia"</button>
+                <button class="masterclass-tab" data-target="pane-2">Perfecting Harissa "Diari"</button>
+                <button class="masterclass-tab" data-target="pane-3">Tomato Paste & Acidity Control</button>
+                <button class="masterclass-tab" data-target="pane-4">Couscous Steaming Secrets</button>
+                <button class="masterclass-tab" data-target="pane-5">Brik & Street Food Mastery</button>
+                <button class="masterclass-tab" data-target="pane-6">Mloukhia & Slow Braises</button>
+            </nav>
+
+            <main class="masterclass-content-area">
+                <article class="masterclass-pane active" id="pane-1">
+                    <h3 class="pane-title">Spice Management & "qalia"</h3>
+                    <p class="drop-cap"><strong>The qalia Technique:</strong> Always fry your spices in hot olive oil before
+                        adding aqueous liquids. Flavor compounds in spices are fat-soluble, meaning the oil extracts and carries
+                        the flavor evenly throughout the entire dish.</p>
+                    <br>
+                    <p><strong>Temperature Control:</strong> Whole seeds (cumin, caraway) can handle medium heat (350°F) until
+                        they pop. Ground spices (like Tabil, turmeric, or paprika) burn exponentially faster.</p>
+                    <br>
+                    <p><strong>Storage Secrets:</strong> Ground spices lose up to 45 percent of their volatile oils within 12
+                        months. Store homemade blends in small, airtight, amber glass jars to block UV rays, and keep them in the
+                        freezer for longevity.</p>
+                </article>
+
+                <article class="masterclass-pane" id="pane-2">
+                    <h3 class="pane-title">Perfecting Authentic Harissa</h3>
+                    <p class="drop-cap"><strong>Deseeding is Crucial:</strong> When using dried chilies (like Guajillo or
+                        Arbol), always snip them open and remove the seeds and white ribs. Retaining seeds creates a punishing
+                        heat, while removing them allows the complex, fruity flavor to shine.</p>
+                    <br>
+                    <p><strong>Proper Hydration:</strong> Soak the deseeded dried chilies in boiling water for about 30 minutes
+                        until completely soft and pliable before blending.</p>
+                    <br>
+                    <p><strong>The Lipid Seal:</strong> Authentic harissa contains no artificial preservatives. Pack the
+                        finished paste tightly into a sterilized jar to remove air pockets, and completely submerge the surface
+                        under a thin, protective layer of olive oil.</p>
+                </article>
+
+                <article class="masterclass-pane" id="pane-3">
+                    <h3 class="pane-title">Tomato Paste & Acidity Control</h3>
+                    <p class="drop-cap"><strong>Always Fry the Paste:</strong> Never dissolve raw tomato paste directly into
+                        broth. Fry it in hot olive oil alongside your onions and garlic. This evaporates excess water, dulls
+                        canned flavors, and caramelizes natural fructose for a deep base.</p>
+                    <br>
+                    <p><strong>Avoid Aluminum Cookware:</strong> Never cook tomato-heavy Tunisian stews in aluminum pans, as the
+                        acid will react with the metal and leach a bitter taste into the food.</p>
+                    <br>
+                    <p><strong>Natural Sweetness:</strong> To mellow out tanginess without dumping refined sugar into your stew,
+                        integrate finely grated carrots or deeply caramelized onions into the base.</p>
+                </article>
+
+                <article class="masterclass-pane" id="pane-4">
+                    <h3 class="pane-title">Couscous Steaming Secrets</h3>
+                    <p class="drop-cap"><strong>The Lipid Coating:</strong> Before steaming, drizzle dry semolina granules with
+                        olive oil and rub vigorously. This fat barrier lubricates the grains and prevents them from gluing
+                        together when exposed to steam.</p>
+                    <br>
+                    <p><strong>Never Pack or Cover:</strong> Let couscous cascade gently into the steamer basket. Packing it
+                        blocks steam vents. Furthermore, steam it entirely uncovered—a lid traps condensation, turning the top
+                        layer into a soggy, clumped mess.</p>
+                    <br>
+                    <p><strong>Three-Stage Hydration:</strong> Steam the grains three separate times, removing them in between
+                        to lightly hydrate with salted water (or broth) and mechanically rake them apart for an airy, fluffy
+                        texture.</p>
+                </article>
+
+                <article class="masterclass-pane" id="pane-5">
+                    <h3 class="pane-title">Brik & Street Food Mastery</h3>
+                    <p class="drop-cap"><strong>The Wrapper Hack:</strong> Authentic brik requires paper-thin malsouka dough. If
+                        unavailable, use Filipino lumpia wrappers or Greek phyllo dough. Avoid thick Chinese egg roll wrappers,
+                        which will fry up too chewy.</p>
+                    <br>
+                    <p><strong>The Frying Spoon Technique:</strong> Drop the brik into 350°F oil. Immediately use a spoon to
+                        repeatedly splash boiling oil over the exposed top surface. This seals the edges and cooks the egg white
+                        before you flip it.</p>
+                    <br>
+                    <p><strong>Oil Extraction:</strong> Transfer the fried brik immediately to paper towels to wick away surface
+                        lipids, and serve with a generous squeeze of lemon juice. The citric acid cuts the richness.</p>
+                </article>
+
+                <article class="masterclass-pane" id="pane-6">
+                    <h3 class="pane-title">Slow Cooking: Mloukhia & Braises</h3>
+                    <p class="drop-cap"><strong>Collagen Breakdown:</strong> When making beef or lamb stews (like Kamounia),
+                        sear the meat first, then braise it low and slow for hours. This melts tough collagen fibers into gelatin,
+                        yielding fork-tender meat and a luxuriously thick sauce.</p>
+                    <br>
+                    <p><strong>Taming Mloukhia:</strong> Dried jute mallow powder is highly mucilaginous. To prevent
+                        impenetrable clumps, thoroughly whisk the dry powder with cold olive oil to create a lipid dispersion
+                        before adding boiling water.</p>
+                    <br>
+                    <p><strong>Phase Separation Cue:</strong> Let Mloukhia simmer up to 5 hours. You will know it is perfectly
+                        cooked when the slimy texture disappears entirely and a distinct layer of clear oil separates and floats
+                        to the top.</p>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+
+<section class="grandma-section">
+    <div class="container grandma-container">
+        <div class="grandma-header reveal">
+            <i class="fa-regular fa-lightbulb"></i>
+            <h2>Pro Tips from Tunisian Grandmothers</h2>
+        </div>
+
+        <!-- Animated Social Proof / Stats Banner -->
+        <div class="heritage-stats reveal" id="heritage-stats">
+            <div class="stat-box">
+                <div class="stat-value"><span class="stat-number" data-target="24">0</span></div>
+                <div class="stat-label">Authentic Heritage Tips</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value"><span class="stat-number" data-target="2500">0</span><span class="stat-plus">+</span>
+                </div>
+                <div class="stat-label">Community Likes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value"><i class="fa-solid fa-landmark-dome"></i></div>
+                <div class="stat-label">UNESCO Culinary Heritage</div>
+            </div>
+        </div>
+
+        <!-- Scroll-Driven Circular Carousel -->
+        <div class="carousel-viewport" id="wisdom-carousel">
+            <div class="carousel-counter">
+                <span id="carousel-current">1</span> / <span id="carousel-total">24</span>
+            </div>
+            <div class="carousel-scene">
+                <div class="carousel-ring" id="carousel-ring">
+
+                    <article class="carousel-card wisdom-saffron" data-index="0">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/hands.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Cold Oil Hack.</strong> Start delicate ground spices in cold oil and bring the heat up
+                            gradually to prevent them from scorching.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-sand" data-index="1">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tools.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Speed is Everything.</strong> Assemble your brik mere seconds before frying. Wet fillings will
+                            hydrate the delicate pastry, causing it to tear and absorb grease.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-terracotta" data-index="2">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/spices.jpg') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Baking Soda Trick.</strong> If your tomato stew is aggressively acidic, add a micro-dose
+                            (1/8 tsp) of baking soda to neutralize it instantly without sugar.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-olive" data-index="3">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/lemons.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Rinse Preserved Lemons.</strong> Always rinse the salt off your preserved lemons thoroughly
+                            before tossing the rinds into a hot chicken or olive tagine.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-blush" data-index="4">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mint.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Thickening Stews Naturally.</strong> To turn a watery broth into a rich gravy, use the back of a
+                            spoon to smash about one-third of the simmering chickpeas against the side of the pot.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-saffron" data-index="5">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mloukhia.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Preserving Harissa.</strong> Every time you use a spoonful of homemade harissa, replenish the
+                            olive oil layer on top to block oxygen and prevent mold.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-sand" data-index="6">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tea.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The High Pour.</strong> Pouring mint tea from at least twelve inches above the glass isn't for
+                            show—it oxygenates the tea and creates the crucial layer of bitter froth.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-terracotta" data-index="7">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/bread.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Onion Patience Test.</strong> A proper Tunisian stew starts with onions cooked low and slow
+                            until they are completely transparent and jammy. Rushing this step ruins everything downstream.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-olive" data-index="8">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/hands.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Rest the Tagine.</strong> Never serve a tagine straight off the flame. Let it rest for ten
+                            minutes. The residual heat finishes the cooking, and the sauce thickens to its perfect, glossy
+                            consistency.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-blush" data-index="9">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tools.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Dry Toast Cumin.</strong> Always dry-toast whole cumin seeds in a hot pan for exactly 60 seconds
+                            before grinding them into your Tabil spice mix to unlock the volatile oils.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-saffron" data-index="10">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/spices.jpg') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Salt at the End.</strong> Never salt chickpea or bean stews at the beginning. Salt toughens the
+                            skin of legumes and doubles the cooking time. Add it in the last fifteen minutes.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-sand" data-index="11">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/lemons.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Date Pit Enzyme.</strong> Keep one clean date pit in your heavy meat braises. Grandmothers
+                            swear the enzymes released act as a natural meat tenderizer.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-terracotta" data-index="12">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mint.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Coriander Roots.</strong> Never throw away coriander roots! Wash them thoroughly and mince them
+                            fine; they contain triple the flavor of the leaves for seafood marinades.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-olive" data-index="13">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mloukhia.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Mloukhia Warning.</strong> Never constantly stir Mloukhia during its 5-hour simmer. Let the
+                            dark green stew bubble undisturbed so the oil can separate properly.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-blush" data-index="14">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tea.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Rose Water Finish.</strong> Couscous sweet dishes (Mesfouf) require a heavy handful of sugar and
+                            a splash of distilled rose water immediately before serving while still piping hot.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-saffron" data-index="15">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/bread.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Tabouna Heat.</strong> For authentic Tabouna bread, the baking stones must be screaming hot. If
+                            the bread doesn't blister black in sixty seconds, the oven is too cold.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-sand" data-index="16">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/hands.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Couscous Broth Depth.</strong> Float two whole, unpierced green chilies in your couscous broth
+                            early on. You get all the aromatic floral notes of the pepper without the fiery heat.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-terracotta" data-index="17">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tools.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Almond Blanching.</strong> Blanch raw almonds in cold milk instead of boiling water if you want
+                            a pure, brilliant white color for your ground almond pastries.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-olive" data-index="18">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/spices.jpg') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Gargoulette Seal.</strong> When slow-cooking lamb in a terracotta gargoulette, seal the mouth of
+                            the jar with tight semolina dough. It forces the steam back down into the meat.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-blush" data-index="19">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/lemons.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Slotted Spoons for Brik.</strong> Never use sharp metal tongs to flip a deep-fried Brik pastry;
+                            you risk piercing the shell and leaking the runny egg yolk. Use two slotted wooden spoons.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-saffron" data-index="20">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mint.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Caraway Finish.</strong> Heavy chickpea and fava bean breakfasts (like Leblebi) always demand a
+                            generous dusting of ground caraway right at the end to aid digestion.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-sand" data-index="21">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/mloukhia.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Orange Blossom Hydration.</strong> If your dates are slightly dry before making stuffed
+                            Makroudh, soak them briefly in warm orange blossom water to plump them up luxuriously.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-terracotta" data-index="22">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/tea.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>Lablabi Bread Rule.</strong> Always use day-old stale bread for lablabi. Fresh bread turns into
+                            mush, whereas stale bread acts as a sturdy sponge for the cumin broth.
+                        </blockquote>
+                    </article>
+
+                    <article class="carousel-card wisdom-olive" data-index="23">
+                        <div class="grandma-icon">
+                            <img src="{{ asset('images/bread.png') }}" alt="Icon">
+                        </div>
+                        <blockquote class="wisdom-quote">
+                            <strong>The Cloth Seal.</strong> Always seal the gap between the couscousier's upper and lower pots with
+                            a wet flour-paste cloth. If steam escapes from the sides, the couscous won't cook.
+                        </blockquote>
+                    </article>
+
+                </div>
+            </div>
+            <div class="carousel-scroll-hint">
+                <i class="fa-solid fa-arrow-down"></i> Scroll to discover more wisdom
+            </div>
+        </div>
+
+        <!-- Add Your Tip CTA -->
+        <div class="add-tip-cta reveal">
+            <button id="add-tip-btn" class="glowing-btn">
+                <i class="fa-solid fa-pen-fancy"></i> Add Your Grandmother's Tip
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- Submission Modal Overlay -->
+<div class="tip-modal-overlay" id="tip-modal">
+    <div class="tip-modal-content">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h3>Share the Heritage</h3>
+        <p>Submit a culinary secret passed down through your family.</p>
+        <form class="tip-form">
+            <input type="text" placeholder="Your Name or Family Name" required>
+            <textarea rows="4" placeholder="Describe the cooking tip, technique, or hack..." required></textarea>
+            <button type="button" class="submit-modal-btn">Submit Tip to Heritage Board</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

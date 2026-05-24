@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Regional Specialties | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<section class="hero" style="background-image: url('{{ asset('images/Auswahl-tunesische-Gerichte-c-123rf-148026485_m.jpg') }}');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="hero-icon">
+            <i class="fa-solid fa-location-dot" style="color: #fff;"></i>
+        </div>
+        <h1>Regional Specialties</h1>
+        <p>Discover the unique culinary traditions of Tunisia's diverse regions</p>
+    </div>
+</section>
+
+<section class="intro text-center">
+    <div class="container">
+        <p>From the Mediterranean coast to the Sahara desert, each Tunisian region has developed its own culinary
+            identity influenced by local geography, history, and available ingredients.</p>
+    </div>
+</section>
+<section class="filters container">
+    <div class="filter-item">
+        <i class="fa-solid fa-water" style="color: var(--primary-red);"></i> <span>Coastal Region</span>
+    </div>
+    <div class="filter-item">
+        <i class="fa-solid fa-location-dot" style="color: var(--primary-red);"></i> <span>Capital/Urban</span>
+    </div>
+    <div class="filter-item">
+        <i class="fa-solid fa-tree" style="color: #8D6E63;"></i> <span>Desert/Oasis</span>
+    </div>
+</section>
+
+<section class="regions-grid container">
+    {% for region in regions %}
+        <div class="region-card">
+            <div class="card-header">
+                <h2>{{ region.name }}</h2>
+                {% if region.iconClass %}
+                    <i class="{{ region.iconClass }}" style="color: {{ region.type == 'Desert/Oasis' ? '#8D6E63' : 'var(--primary-red)' }};"></i>
+                {% endif %}
+            </div>
+            {% if region.subtitle %}
+                <p class="card-subtitle">{{ region.subtitle }}</p>
+            {% endif %}
+            <p class="card-desc">{{ region.description }}</p>
+            <div class="signature-dishes">
+                <h4><span>|</span> Signature Dishes</h4>
+                <div class="tags">
+                    {% for recipe in region.recipes|slice(0, 4) %}
+                        <a href="{{ path('app_recipe_show', {id: recipe.id}) }}" class="tag" style="text-decoration: none;">{{ recipe.name }}</a>
+                    {% else %}
+                        <span class="tag">Coming soon</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if region.didYouKnow %}
+                <div class="did-you-know">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <p>{{ region.didYouKnow }}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</section>
+
+<section class="geography container">
+    <div class="geo-header">
+        <i class="fa-solid fa-location-dot"></i>
+        <h3>Tunisia's Culinary Geography</h3>
+    </div>
+    <div class="geo-grid">
+        <div class="geo-item">
+            <h4>Northern Coast</h4>
+            <p>Mediterranean influences, abundant seafood, French colonial heritage, and Europe-facing trade routes.
+            </p>
+        </div>
+        <div class="geo-item">
+            <h4>Central Tunisia</h4>
+            <p>Traditional heartland with ancient cities, olive groves, agricultural plains, and preserved culinary
+                heritage.</p>
+        </div>
+        <div class="geo-item">
+            <h4>Southern Regions</h4>
+            <p>Desert oases, date cultivation, spicier cuisine, and Berber influences with Saharan trade
+                connections.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

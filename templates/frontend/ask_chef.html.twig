@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ask the Chef | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<!-- Hero Section -->
+<section class="hero ask-chef-hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <div class="chef-hero-avatar">
+                <i class="fa-solid fa-hat-cowboy"></i>
+            </div>
+            <h1>Ask the Chef</h1>
+            <p class="hero-subtitle">
+                Your personal Tunisian culinary companion — ask anything about recipes, techniques, and traditions
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Chat Interface -->
+<section class="ask-chef-section">
+    <div class="container ask-chef-container">
+        <div class="chat-card">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <div class="chef-status">
+                    <div class="chef-avatar">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="chef-info">
+                        <h3>Chef Karim</h3>
+                        <span class="status-dot"></span>
+                        <span class="status-text">Online</span>
+                    </div>
+                </div>
+                <div class="chat-badge">
+                    <i class="fa-solid fa-circle-check"></i> Verified Chef
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="message chef-message reveal" style="--delay: 0.1s">
+                    <div class="message-avatar">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="message-bubble">
+                        <p>Marhaba! Welcome to the kitchen. I am Chef Karim, and I have spent over 20 years mastering the art of Tunisian cooking.</p>
+                        <p style="margin-top: 8px">Ask me anything — from perfecting your couscous steam to choosing the right harissa for your stew. How can I help you today?</p>
+                        <span class="message-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="message-avatar">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="typing-bubble">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- Suggested Questions -->
+            <div class="suggested-questions" id="suggested-questions">
+                <span class="suggestions-label">Popular questions</span>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" data-question="What is harissa and how do I use it?">What is harissa?</button>
+                    <button class="suggestion-chip" data-question="How do I make fluffy couscous?">How to make couscous?</button>
+                    <button class="suggestion-chip" data-question="What is tabil spice blend?">What is tabil?</button>
+                    <button class="suggestion-chip" data-question="How do I cook authentic brik?">How to cook brik?</button>
+                    <button class="suggestion-chip" data-question="What is the national dish of Tunisia?">National dish?</button>
+                    <button class="suggestion-chip" data-question="What spices do I need for a tagine?">Tagine spices?</button>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        placeholder="Type your culinary question..."
+                        autocomplete="off"
+                    />
+                    <button id="send-btn" class="send-btn" aria-label="Send message">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="input-hint">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Chef Karim responds based on traditional Tunisian culinary knowledge
+                </p>
+            </div>
+        </div>
+
+        <!-- Chef Sidebar Info -->
+        <aside class="chef-sidebar">
+            <div class="sidebar-card reveal" style="--delay: 0.2s">
+                <div class="sidebar-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h4>Response Time</h4>
+                <p>Typically replies within seconds with knowledge gathered from decades of Tunisian kitchen experience.</p>
+            </div>
+            <div class="sidebar-card reveal" style="--delay: 0.3s">
+                <div class="sidebar-icon">
+                    <i class="fa-solid fa-fire-burner"></i>
+                </div>
+                <h4>Expertise</h4>
+                <p>Traditional recipes, spice blending, couscous techniques, pastry arts, and regional specialties from every corner of Tunisia.</p>
+            </div>
+            <div class="sidebar-card reveal" style="--delay: 0.4s">
+                <div class="sidebar-icon">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+                <h4>Languages</h4>
+                <p>Ask in English, French, or Arabic. Chef Karim understands culinary terms across all three languages.</p>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

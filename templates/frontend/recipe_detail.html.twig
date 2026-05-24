@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ recipe.name }} | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<section class="hero" style="background-image: url('{{ recipe.image ?? 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80' }}'); height: 450px;">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="hero-icon">
+            <i class="fa-solid fa-utensils" style="color: #fff;"></i>
+        </div>
+        <h1>{{ recipe.name }}</h1>
+        {% if recipe.region %}
+            <p>{{ recipe.region.name }}</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="recipe-detail-section">
+    <div class="container recipe-detail-container">
+        <!-- Recipe Meta -->
+        <div class="recipe-meta-bar">
+            <div class="meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>{{ recipe.prepTime + recipe.cookTime }}</strong> min total</span>
+            </div>
+            <div class="meta-item">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span>Prep <strong>{{ recipe.prepTime }}</strong> min</span>
+            </div>
+            <div class="meta-item">
+                <i class="fa-solid fa-fire-burner"></i>
+                <span>Cook <strong>{{ recipe.cookTime }}</strong> min</span>
+            </div>
+            <div class="meta-item">
+                <i class="fa-solid fa-user-group"></i>
+                <span><strong>{{ recipe.servings }}</strong> servings</span>
+            </div>
+            <div class="meta-item">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span><strong>{{ recipe.difficulty }}</strong></span>
+            </div>
+        </div>
+
+        <div class="recipe-detail-grid">
+            <!-- Ingredients -->
+            <div class="ingredients-panel">
+                <div class="panel-header">
+                    <div class="detail-line"></div>
+                    <h2>Ingredients</h2>
+                </div>
+                <ul class="ingredients-list">
+                    {% for ri in recipe.recipeIngredients %}
+                        <li class="ingredient-item">
+                            <span class="ingredient-check"><i class="fa-regular fa-circle"></i></span>
+                            <span class="ingredient-name">{{ ri.ingredient.name }}</span>
+                            <span class="ingredient-qty">{{ ri.quantity }} {{ ri.unit }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Steps -->
+            <div class="steps-panel">
+                <div class="panel-header">
+                    <div class="detail-line"></div>
+                    <h2>Preparation</h2>
+                </div>
+                <div class="steps-list">
+                    {% for step in recipe.steps %}
+                        <div class="step-item reveal" style="--delay: {{ 0.1 + (loop.index0 * 0.1) }}s">
+                            <div class="step-number">{{ step.stepOrder }}</div>
+                            <div class="step-content">
+                                <p>{{ step.description }}</p>
+                                {% if step.tip %}
+                                    <div class="step-tip">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                        <span>{{ step.tip }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

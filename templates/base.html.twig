@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tunisian Cuisine{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+    {% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
+    {% if frankenphpHotReload %}
+    <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
+    <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
+    <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
+    {% endif %}
+</head>
+<body>
+    {% set current_route = app.request.attributes.get('_route') %}
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red)"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Tunisian Cuisine</span>
+                    <span class="logo-subtitle">المطبخ التونسي</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="{{ path('app_recipes') }}" class="{{ current_route == 'app_recipes' or current_route == 'app_recipe_show' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-utensils"></i> Recipes</a>
+                <a href="{{ path('app_about') }}" class="{{ current_route == 'app_about' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-circle-info"></i> About</a>
+                <a href="{{ path('app_regions') }}" class="{{ current_route == 'app_regions' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-location-dot"></i> Regions</a>
+                <a href="{{ path('app_ingredients') }}" class="{{ current_route == 'app_ingredients' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-leaf"></i> Ingredients</a>
+                <a href="{{ path('app_tips') }}" class="{{ current_route == 'app_tips' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-book-open"></i> Cooking Tips</a>
+                <a href="{{ path('app_ask_chef') }}" class="{{ current_route == 'app_ask_chef' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-comment"></i> Ask Chef</a>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fa-solid fa-pepper-hot" style="color: var(--primary-red)"></i>
+                    <span class="logo-title">Tunisian Recipes</span>
+                </div>
+                <p>Preserving and sharing the rich culinary heritage of Tunisia, one recipe at a time.</p>
+                <div class="socials">
+                    <i class="fa-brands fa-facebook" style="margin-right: 15px; color: #666"></i>
+                    <i class="fa-brands fa-instagram" style="margin-right: 15px; color: #666"></i>
+                    <i class="fa-brands fa-pinterest" style="color: #666"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Popular Regions</h4>
+                <ul>
+                    <li>Tunis - Capital Classics</li>
+                    <li>Sfax - Coastal Delights</li>
+                    <li>Djerba - Island Specialties</li>
+                    <li>Kairouan - Traditional Sweets</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li>About Tunisian Cuisine</li>
+                    <li>Ingredient Glossary</li>
+                    <li>Cooking Tips & Techniques</li>
+                    <li>Ask the Chef</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Tunisian Recipes. Made with <i class="fa-solid fa-heart" style="color: var(--primary-red)"></i> for Tunisian cuisine lovers worldwide.</p>
+        </div>
+    </footer>
+</body>
+</html>
