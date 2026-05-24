@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My recipes | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header">
+        <h1>My recipes</h1>
+        <p>Track submissions waiting for review or edit recipes that were declined.</p>
+        <div class="tc-page-actions">
+            <a href="{{ path('app_recipe_new') }}" class="btn-primary-tc" data-turbo="false"><i class="fa-solid fa-plus"></i> Add recipe</a>
+        </div>
+    </header>
+
+    <div class="account-wrap">
+        {% if recipes is empty %}
+            <div class="tc-card">
+                <p style="margin:0;color:var(--tc-muted);">You have not submitted any recipes yet.</p>
+            </div>
+        {% else %}
+            {% for recipe in recipes %}
+                <article class="pending-card">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
+                        <h3 style="margin:0;">{{ recipe.name }}</h3>
+                        <span class="status-badge status-{{ recipe.status.value }}">{{ recipe.status.label }}</span>
+                    </div>
+                    {% if recipe.region %}
+                        <p style="margin:0.5rem 0 0;color:var(--tc-muted);font-size:0.9rem;"><i class="fa-solid fa-location-dot"></i> {{ recipe.region.name }}</p>
+                    {% endif %}
+                    {% if recipe.rejectionReason %}
+                        <p style="margin-top:0.75rem;padding:0.75rem;background:#ffebee;border-radius:8px;color:#c62828;font-size:0.9rem;">
+                            <strong>Declined:</strong> {{ recipe.rejectionReason }}
+                        </p>
+                    {% endif %}
+                    <div class="pending-actions">
+                        {% if recipe.status.value == 'published' %}
+                            <a href="{{ path('app_recipe_show', {id: recipe.id}) }}" class="btn-primary-tc" data-turbo="false">View recipe</a>
+                        {% endif %}
+                        {% if recipe.status.value in ['pending', 'rejected'] %}
+                            <a href="{{ path('app_recipe_edit', {id: recipe.id}) }}" class="btn-secondary-tc" data-turbo="false">Edit & resubmit</a>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

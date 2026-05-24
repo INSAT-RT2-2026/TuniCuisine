@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header">
+        <h1>Admin dashboard</h1>
+        <p>Review community submissions and manage the recipe catalog.</p>
+        <div class="tc-page-actions">
+            <a href="{{ path('app_recipe_new') }}" class="btn-primary-tc" data-turbo="false"><i class="fa-solid fa-plus"></i> Add recipe (publish now)</a>
+            <a href="{{ path('admin_activity') }}" class="btn-secondary-tc" data-turbo="false">Activity log</a>
+        </div>
+    </header>
+
+    <div class="admin-wrap">
+        <div class="admin-stats">
+            <a href="{{ path('admin_recipes_pending') }}" class="admin-stat-card" data-turbo="false">
+                <h3>Pending recipes</h3>
+                <div class="stat-num">{{ pendingRecipes|length }}</div>
+            </a>
+            <a href="{{ path('admin_tips_pending') }}" class="admin-stat-card" data-turbo="false">
+                <h3>Pending tips</h3>
+                <div class="stat-num">{{ pendingTips|length }}</div>
+            </a>
+            <a href="{{ path('admin_comments_pending') }}" class="admin-stat-card" data-turbo="false">
+                <h3>Pending comments</h3>
+                <div class="stat-num">{{ pendingComments|length }}</div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

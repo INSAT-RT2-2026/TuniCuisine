@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending recipes | Admin{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header">
+        <h1>Pending recipes</h1>
+        <p><a href="{{ path('admin_dashboard') }}" style="color:var(--primary-red);">← Back to dashboard</a></p>
+    </header>
+
+    <div class="admin-wrap">
+        {% if recipes is empty %}
+            <div class="tc-card"><p style="margin:0;">No pending submissions. Great job!</p></div>
+        {% endif %}
+
+        {% for recipe in recipes %}
+            <article class="pending-card">
+                <h3>{{ recipe.name }}</h3>
+                <p style="color:var(--tc-muted);margin:0.35rem 0;">
+                    By <strong>{{ recipe.submittedBy ? recipe.submittedBy.displayName : 'Unknown' }}</strong>
+                    · {{ recipe.difficulty ?? '—' }}
+                    · {{ recipe.region ? recipe.region.name : 'No region' }}
+                </p>
+                {% if recipe.description %}
+                    <p style="margin-top:0.75rem;line-height:1.6;">{{ recipe.description|slice(0, 280) }}{% if recipe.description|length > 280 %}…{% endif %}</p>
+                {% endif %}
+                <div class="pending-actions">
+                    <form method="post" action="{{ path('admin_recipe_approve', {id: recipe.id}) }}">
+                        <button type="submit" class="btn-primary-tc"><i class="fa-solid fa-check"></i> Approve</button>
+                    </form>
+                    <form method="post" action="{{ path('admin_recipe_reject', {id: recipe.id}) }}" style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+                        <input type="text" name="reason" placeholder="Rejection reason for the author" required style="padding:0.65rem 0.85rem;border:1px solid var(--tc-border);border-radius:8px;min-width:220px;font:inherit;">
+                        <button type="submit" class="btn-secondary-tc">Decline</button>
+                    </form>
+                    <a href="{{ path('admin_recipe_edit', {id: recipe.id}) }}" class="btn-secondary-tc" data-turbo="false">Edit before publish</a>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

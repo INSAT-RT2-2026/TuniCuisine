@@ -4,17 +4,16 @@
 
 {% block body %}
 <!-- Hero Section -->
-<section class="hero ask-chef-hero">
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <div class="chef-hero-avatar">
-                <i class="fa-solid fa-hat-cowboy"></i>
-            </div>
-            <h1>Ask the Chef</h1>
-            <p class="hero-subtitle">
-                Your personal Tunisian culinary companion — ask anything about recipes, techniques, and traditions
-            </p>
+<section class="hero ask-chef-hero" style="background-image: url('{{ asset('images/chef-karim-comic.png') }}');">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-content ask-chef-hero-content">
+        <div class="ask-chef-hero-badge" aria-hidden="true">
+            <i class="fa-solid fa-hat-chef"></i>
         </div>
+        <h1>Ask the Chef</h1>
+        <p class="hero-subtitle">
+            Your personal Tunisian culinary companion — ask anything about recipes, techniques, and traditions
+        </p>
     </div>
 </section>
 

@@ -51,9 +51,35 @@
                 </div>
             </div>
 
+            {% if recipe.submittedBy %}
+                <p style="color:var(--rc-muted-fg);margin-bottom:1rem;"><i class="fa-solid fa-user-pen"></i> Contributed by <strong>{{ recipe.submittedBy.displayName }}</strong></p>
+            {% endif %}
+
             {% if recipe.description %}
                 <p style="color:var(--rc-muted-fg);line-height:1.7;margin-bottom:2rem;max-width:48rem;">{{ recipe.description }}</p>
             {% endif %}
+
+            <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:2rem;">
+                {% if app.user and recipe.isPublished %}
+                    <button type="button"
+                            class="btn-secondary-tc recipe-detail-fav-btn {{ is_recipe_favorite(recipe) ? 'is-favorite' : '' }}"
+                            data-recipe-id="{{ recipe.id }}"
+                            data-favorite-url="{{ path('app_recipe_favorite_toggle', {id: recipe.id}) }}"
+                            data-turbo="false">
+                        <i class="fa-{{ is_recipe_favorite(recipe) ? 'solid' : 'regular' }} fa-heart"></i>
+                        <span class="recipe-detail-fav-label">{{ is_recipe_favorite(recipe) ? 'Saved' : 'Save' }}</span>
+                    </button>
+                {% endif %}
+                {% if ratingStats.count > 0 %}
+                    <span><i class="fa-solid fa-star" style="color:#f9a825;"></i> {{ ratingStats.average }}/5 ({{ ratingStats.count }} ratings)</span>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') and recipe.isPublished %}
+                    <a href="{{ path('admin_recipe_edit', {id: recipe.id}) }}" class="btn-secondary-tc" style="text-decoration:none;">Edit</a>
+                    <form method="post" action="{{ path('admin_recipe_delete', {id: recipe.id}) }}" onsubmit="return confirm('Remove this recipe?');" style="display:inline;">
+                        <button type="submit" class="btn-secondary-tc">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
 
             <div class="recipe-detail-grid">
                 <section class="recipe-panel">
@@ -84,6 +110,83 @@
                     </ol>
                 </section>
             </div>
+
+            <section class="recipe-interactions recipe-panel">
+                <h2>Ratings &amp; comments</h2>
+
+                {% if app.user and recipe.isPublished %}
+                    <div class="recipe-interaction-grid">
+                        <div class="recipe-interaction-card recipe-rating-card">
+                            <span class="recipe-interaction-label">Your rating</span>
+                            {% if userRating %}
+                                <p class="recipe-rating-summary">You rated this recipe <strong>{{ userRating.score }}/5</strong></p>
+                            {% endif %}
+                            <form method="post" action="{{ path('app_recipe_rate', {id: recipe.id}) }}" class="star-rating" data-turbo="false" aria-label="Rate this recipe">
+                                {% for i in 1..5 %}
+                                    <button type="submit" name="score" value="{{ i }}" class="{{ userRating and userRating.score >= i ? 'active' : '' }}" title="{{ i }} star{{ i > 1 ? 's' : '' }}" aria-label="{{ i }} stars">★</button>
+                                {% endfor %}
+                            </form>
+                        </div>
+
+                        <div class="recipe-interaction-card recipe-comment-card">
+                            {{ form_start(commentForm, {
+                                action: path('app_recipe_comment', {id: recipe.id}),
+                                attr: { class: 'tc-form recipe-comment-form', 'data-turbo': 'false' }
+                            }) }}
+                                {{ form_row(commentForm.content, {
+                                    label: 'Your comment',
+                                    row_attr: { class: 'recipe-comment-field' },
+                                    attr: { class: 'recipe-comment-textarea', rows: 5, placeholder: 'Share your experience with this recipe…' }
+                                }) }}
+                                <div class="recipe-comment-form__actions">
+                                    <button type="submit" class="btn-primary-tc">
+                                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                                        Post comment
+                                    </button>
+                                </div>
+                            {{ form_end(commentForm) }}
+                            {% if not is_granted('ROLE_ADMIN') %}
+                                <p class="recipe-comment-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Comments are reviewed before appearing publicly.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% elseif not app.user %}
+                    <p class="recipe-interaction-login"><a href="{{ path('app_login') }}">Log in</a> to rate and comment on this recipe.</p>
+                {% endif %}
+
+                <div class="recipe-comments-list">
+                    <div class="recipe-comments-list__head">
+                        <h3>Comments</h3>
+                        {% if comments|length > 0 %}
+                            <span class="recipe-comments-count">{{ comments|length }}</span>
+                        {% endif %}
+                    </div>
+
+                    {% if comments|length > 0 %}
+                        <div class="recipe-comments-feed">
+                            {% for comment in comments %}
+                                <article class="comment-card">
+                                    <div class="comment-card__avatar" aria-hidden="true">{{ comment.author.displayName|slice(0, 1)|upper }}</div>
+                                    <div class="comment-card__body">
+                                        <header class="comment-card__header">
+                                            <div class="comment-card__meta">
+                                                <strong class="comment-card__author">{{ comment.author.displayName }}</strong>
+                                                <time datetime="{{ comment.createdAt|date('c') }}">{{ comment.createdAt|date('M j, Y') }}</time>
+                                            </div>
+                                        </header>
+                                        <p class="comment-card__text">{{ comment.content }}</p>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="recipe-comments-empty-state">
+                            <i class="fa-regular fa-comments" aria-hidden="true"></i>
+                            <p>No comments yet. Be the first to share your thoughts!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
 
         </div>
     </main>

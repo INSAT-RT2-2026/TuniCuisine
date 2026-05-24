@@ -486,9 +486,24 @@
             </div>
         </div>
 
+        <!-- Community tips from visitors -->
+        <div class="community-tips-board reveal" id="community-tips-board">
+            <h3 class="community-tips-title"><i class="fa-solid fa-heart"></i> Tips from Our Community</h3>
+            <div class="community-tips-list" id="community-tips-list">
+                {% for tip in communityTips %}
+                    <article class="community-tip-card" data-tip-id="{{ tip.id }}">
+                        <blockquote class="wisdom-quote">{{ tip.content }}</blockquote>
+                        <p class="community-tip-author">— {{ tip.authorName }}</p>
+                    </article>
+                {% else %}
+                    <p class="community-tips-empty" id="community-tips-empty">Be the first to share your grandmother's wisdom!</p>
+                {% endfor %}
+            </div>
+        </div>
+
         <!-- Add Your Tip CTA -->
         <div class="add-tip-cta reveal">
-            <button id="add-tip-btn" class="glowing-btn">
+            <button type="button" id="add-tip-btn" class="glowing-btn">
                 <i class="fa-solid fa-pen-fancy"></i> Add Your Grandmother's Tip
             </button>
         </div>
@@ -501,11 +516,17 @@
     <div class="tip-modal-content">
         <span class="close-modal" id="close-modal">&times;</span>
         <h3>Share the Heritage</h3>
-        <p>Submit a culinary secret passed down through your family.</p>
-        <form class="tip-form">
-            <input type="text" placeholder="Your Name or Family Name" required>
-            <textarea rows="4" placeholder="Describe the cooking tip, technique, or hack..." required></textarea>
-            <button type="button" class="submit-modal-btn">Submit Tip to Heritage Board</button>
+        <p>
+            Submit a culinary secret passed down through your family.
+            {% if is_granted('ROLE_ADMIN') %}
+                <strong>As admin, your tip will appear immediately.</strong>
+            {% endif %}
+        </p>
+        <form class="tip-form" id="tip-form">
+            <input type="text" id="tip-author" name="authorName" placeholder="Your Name or Family Name" required maxlength="120">
+            <textarea id="tip-content" name="content" rows="4" placeholder="Describe the cooking tip, technique, or hack..." required maxlength="2000"></textarea>
+            <p class="tip-form-error" id="tip-form-error" hidden></p>
+            <button type="submit" class="submit-modal-btn">Submit Tip to Heritage Board</button>
         </form>
     </div>
 </div>

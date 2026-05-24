@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ isNew ? 'Add recipe' : 'Edit recipe' }} | Tunisian Cuisine{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/recipes.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header">
+        <h1>{{ isNew ? 'Add a recipe' : 'Edit recipe' }}</h1>
+        {% if not is_granted('ROLE_ADMIN') and isNew %}
+            <p>Your recipe will be reviewed by an admin before it appears on the site.</p>
+        {% elseif is_granted('ROLE_ADMIN') %}
+            <p>As an admin, your recipe will be published immediately after you submit.</p>
+        {% endif %}
+    </header>
+
+    {% if similarNames is not empty %}
+        <div class="duplicate-warning">
+            <strong><i class="fa-solid fa-triangle-exclamation"></i> Similar recipes already exist:</strong>
+            {{ similarNames|join(', ') }}
+        </div>
+    {% endif %}
+
+    <div class="admin-wrap">
+        {{ form_start(form, { attr: { class: 'tc-form', enctype: 'multipart/form-data' } }) }}
+            <section class="admin-card">
+                <h2>Recipe details</h2>
+                <div class="tc-form-grid">
+                    <div class="full-width">{{ form_row(form.name) }}</div>
+                    <div class="full-width">{{ form_row(form.description) }}</div>
+                    <div>{{ form_row(form.region) }}</div>
+                    <div>{{ form_row(form.difficulty) }}</div>
+                </div>
+                <div class="tc-form-grid tc-form-grid--4" style="margin-top:1rem;">
+                    <div>{{ form_row(form.prepTime) }}</div>
+                    <div>{{ form_row(form.cookTime) }}</div>
+                    <div>{{ form_row(form.servings) }}</div>
+                    <div>{{ form_row(form.imageFile) }}</div>
+                </div>
+            </section>
+
+            <section class="admin-card">
+                <h2>Ingredients</h2>
+                <div id="ingredients-collection" class="collection-list" data-prototype="{{ form_widget(form.recipeIngredients.vars.prototype)|e('html_attr') }}">
+                    {% for item in form.recipeIngredients %}
+                        <div class="collection-item collection-item--ingredient">
+                            {{ form_widget(item) }}
+                            <button type="button" class="remove-item" aria-label="Remove ingredient">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn-secondary-tc" data-collection-add="ingredients-collection">
+                    <i class="fa-solid fa-plus"></i> Add ingredient
+                </button>
+            </section>
+
+            <section class="admin-card">
+                <h2>Steps</h2>
+                <div id="steps-collection" class="collection-list" data-prototype="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
+                    {% for item in form.steps %}
+                        <div class="collection-item collection-item--step">
+                            <div>{{ form_row(item.stepOrder) }}</div>
+                            <div class="step-fields">
+                                {{ form_row(item.description) }}
+                                {{ form_row(item.tip) }}
+                            </div>
+                            <button type="button" class="remove-item" aria-label="Remove step">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="button" class="btn-secondary-tc" data-collection-add="steps-collection">
+                    <i class="fa-solid fa-plus"></i> Add step
+                </button>
+            </section>
+
+            <div class="tc-form-footer">
+                <button type="submit" class="btn-primary-tc">
+                    <i class="fa-solid fa-check"></i> {{ isNew ? 'Submit recipe' : 'Save changes' }}
+                </button>
+                <a href="{{ adminEdit|default(false) ? path('admin_dashboard') : path('app_my_recipes') }}" class="btn-secondary-tc">Cancel</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+
+<script type="module">
+    import { initRecipeForm } from '{{ asset('js/recipe-form.js') }}';
+    initRecipeForm();
+</script>
+{% endblock %}

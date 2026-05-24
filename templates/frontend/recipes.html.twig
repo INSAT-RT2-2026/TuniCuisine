@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block body %}
-<div class="recipes-page">
+<div class="recipes-page"
+     id="favorites"
+     data-user-logged-in="{{ app.user ? '1' : '0' }}"
+     data-favorite-ids="{{ favoriteRecipeIds|json_encode|e('html_attr') }}">
     <header class="recipes-hero">
         <div class="recipes-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1746274394124-141a1d1c5af3?w=1080&q=80');"></div>
         <div class="recipes-hero-overlay"></div>
@@ -84,6 +87,7 @@
             {% if recipes|length > 0 %}
                 <div class="recipes-grid">
                     {% for recipe in recipes %}
+                        {% set rating = recipeRatings[recipe.id] ?? null %}
                         <article class="recipe-card-wrap" data-recipe-id="{{ recipe.id }}">
                             <button type="button" class="recipe-fav-btn" data-recipe-id="{{ recipe.id }}" aria-label="Add to favorites">
                                 <i class="fa-regular fa-heart"></i>
@@ -94,6 +98,17 @@
                                     <img src="{{ imgSrc starts with 'http' ? imgSrc : asset(imgSrc) }}" alt="{{ recipe.name }}" loading="lazy">
                                     {% if recipe.difficulty %}
                                         <span class="recipe-difficulty {{ recipe.difficulty|lower }}">{{ recipe.difficulty }}</span>
+                                    {% endif %}
+                                    {% if rating and rating.count > 0 %}
+                                        <span class="recipe-card-rating" aria-label="Rated {{ rating.average }} out of 5 from {{ rating.count }} reviews">
+                                            <span class="recipe-card-rating__stars" aria-hidden="true">
+                                                {% for i in 1..5 %}
+                                                    <i class="fa-{{ i <= rating.average|round ? 'solid' : 'regular' }} fa-star"></i>
+                                                {% endfor %}
+                                            </span>
+                                            <span class="recipe-card-rating__score">{{ rating.average }}</span>
+                                            <span class="recipe-card-rating__count">({{ rating.count }})</span>
+                                        </span>
                                     {% endif %}
                                 </div>
                                 <div class="recipe-card-body">

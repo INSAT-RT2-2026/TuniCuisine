@@ -1,0 +1,147 @@
+/* Regions page — from Webtunicuisine design */
+
+.regions-page .hero {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.regions-page .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(255, 249, 245, 1) 100%
+    );
+    z-index: 1;
+}
+
+.regions-page .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.regions-page .hero-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.regions-page .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.regions-page .hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    font-weight: 300;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.regions-page .intro {
+    padding: 0 0 50px;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+}
+
+.regions-page .filters {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+.regions-page .filter-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    border: none;
+    background: none;
+    font-family: inherit;
+    color: var(--text-color);
+}
+
+.regions-page .filter-item:hover,
+.regions-page .filter-item.active {
+    color: var(--primary-red);
+}
+
+.regions-page .filter-item.active {
+    font-weight: 700;
+}
+
+.regions-page .regions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.regions-page .region-card {
+    background: #fff;
+    border: 1px solid #ffab91;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.regions-page .region-card.is-hidden {
+    display: none;
+}
+
+.regions-page .region-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-red);
+}
+
+.regions-page .geography {
+    background-color: #fff3e0;
+    border: 1px solid #ffccbc;
+    border-radius: 12px;
+    padding: 30px 40px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 1024px) {
+    .regions-page .regions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .regions-page .regions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .regions-page .hero h1 {
+        font-size: 2.5rem;
+    }
+}

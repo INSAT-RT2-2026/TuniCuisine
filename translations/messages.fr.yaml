@@ -1,0 +1,12 @@
+auth.login: Connexion
+auth.login_subtitle: Accédez à votre compte pour proposer des recettes et enregistrer vos favoris.
+auth.register: Créer un compte
+auth.register_subtitle: Rejoignez la communauté TuniCuisine et partagez vos recettes de famille.
+auth.email: E-mail
+auth.password: Mot de passe
+auth.no_account: Pas encore de compte ?
+auth.have_account: Déjà un compte ? Connexion
+account.created: Compte créé. Vous pouvez vous connecter.
+recipe.published: Recette publiée avec succès.
+recipe.submitted: Recette envoyée pour validation. Vous serez notifié après approbation.
+comment.pending: Commentaire envoyé pour validation.

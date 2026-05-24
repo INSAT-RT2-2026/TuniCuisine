@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Repository\CommunityTipRepository;
 use App\Repository\IngredientRepository;
 use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,9 +14,11 @@ use Symfony\Component\Routing\Attribute\Route;
 final class FrontendController extends AbstractController
 {
     #[Route('/tips', name: 'app_tips')]
-    public function tips(): Response
+    public function tips(CommunityTipRepository $communityTipRepository): Response
     {
-        return $this->render('frontend/tips.html.twig');
+        return $this->render('frontend/tips.html.twig', [
+            'communityTips' => $communityTipRepository->findLatestPublished(),
+        ]);
     }
 
     #[Route('/about', name: 'app_about')]

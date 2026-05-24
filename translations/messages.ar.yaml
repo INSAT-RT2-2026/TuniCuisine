@@ -1,0 +1,12 @@
+auth.login: تسجيل الدخول
+auth.login_subtitle: ادخل إلى حسابك لإضافة وصفات وحفظ المفضلة.
+auth.register: إنشاء حساب
+auth.register_subtitle: انضم إلى مجتمع توني كوزين وشارك وصفات عائلتك.
+auth.email: البريد الإلكتروني
+auth.password: كلمة المرور
+auth.no_account: ليس لديك حساب؟
+auth.have_account: لديك حساب؟ سجّل الدخول
+account.created: تم إنشاء الحساب. يمكنك تسجيل الدخول الآن.
+recipe.published: تم نشر الوصفة بنجاح.
+recipe.submitted: تم إرسال الوصفة للمراجعة. سنُعلمك عند الموافقة.
+comment.pending: تم إرسال التعليق للمراجعة.

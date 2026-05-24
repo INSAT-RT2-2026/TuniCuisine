@@ -438,51 +438,137 @@ export function initTips() {
         cleanupFns.push(() => observer.disconnect());
     };
 
+    const escapeHtml = (str) => {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    };
+
+    const prependCommunityTip = (authorName, content, id) => {
+        const list = document.getElementById('community-tips-list');
+        const empty = document.getElementById('community-tips-empty');
+        if (!list) return;
+
+        if (empty) empty.remove();
+
+        const article = document.createElement('article');
+        article.className = 'community-tip-card community-tip-new';
+        article.dataset.tipId = String(id ?? '');
+        article.innerHTML = `
+            <blockquote class="wisdom-quote">${escapeHtml(content)}</blockquote>
+            <p class="community-tip-author">— ${escapeHtml(authorName)}</p>
+        `;
+        list.prepend(article);
+
+        const board = document.getElementById('community-tips-board');
+        if (board) {
+            board.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    };
+
     // Modal Interactions
     const initTipModal = () => {
         const btn = document.getElementById('add-tip-btn');
         const modal = document.getElementById('tip-modal');
         const closeBtn = document.getElementById('close-modal');
-        const submitBtn = modal?.querySelector('.submit-modal-btn');
+        const form = document.getElementById('tip-form');
+        const errorEl = document.getElementById('tip-form-error');
 
-        if (!btn || !modal) return;
+        if (!btn || !modal || !form) return;
 
-        const openModal = () => modal.classList.add('active');
+        const openModal = () => {
+            modal.classList.add('active');
+            if (errorEl) {
+                errorEl.hidden = true;
+                errorEl.textContent = '';
+            }
+        };
         const closeModal = () => modal.classList.remove('active');
         const onBackdrop = (e) => {
             if (e.target === modal) modal.classList.remove('active');
         };
 
         btn.addEventListener('click', openModal);
-        closeBtn.addEventListener('click', closeModal);
+        closeBtn?.addEventListener('click', closeModal);
         modal.addEventListener('click', onBackdrop);
-        cleanupFns.push(() => {
-            btn.removeEventListener('click', openModal);
-            closeBtn.removeEventListener('click', closeModal);
-            modal.removeEventListener('click', onBackdrop);
-        });
 
-        if (submitBtn) {
-            const onSubmit = () => {
-                const form = modal.querySelector('form');
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
+        const onSubmit = async (e) => {
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const authorName = document.getElementById('tip-author')?.value.trim() ?? '';
+            const content = document.getElementById('tip-content')?.value.trim() ?? '';
+            const submitBtn = form.querySelector('.submit-modal-btn');
+            if (!submitBtn) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saving...';
+            if (errorEl) errorEl.hidden = true;
+
+            try {
+                const response = await fetch('/api/tips', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ authorName, content }),
+                });
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Could not save your tip');
                 }
 
-                submitBtn.textContent = 'Submitted! Thank you!';
-                submitBtn.style.background = '#4CAF50';
+                const wasPending = Boolean(data.pending);
+                if (wasPending) {
+                    submitBtn.textContent = 'Sent for review!';
+                    if (errorEl) {
+                        errorEl.textContent = data.message || 'Your tip will appear after admin approval.';
+                        errorEl.hidden = false;
+                        errorEl.style.color = '#2e7d32';
+                        errorEl.style.background = '#e8f5e9';
+                        errorEl.style.padding = '0.75rem';
+                        errorEl.style.borderRadius = '8px';
+                    }
+                } else if (data.tip) {
+                    prependCommunityTip(data.tip.authorName, data.tip.content, data.tip.id);
+                    submitBtn.textContent = 'Submitted! Thank you!';
+                    submitBtn.style.background = '#4CAF50';
+                }
 
                 setTimeout(() => {
-                    modal.classList.remove('active');
+                    closeModal();
                     submitBtn.textContent = 'Submit Tip to Heritage Board';
                     submitBtn.style.background = '';
+                    submitBtn.disabled = false;
                     form.reset();
-                }, 1500);
-            };
-            submitBtn.addEventListener('click', onSubmit);
-            cleanupFns.push(() => submitBtn.removeEventListener('click', onSubmit));
-        }
+                    if (errorEl) {
+                        errorEl.hidden = true;
+                        errorEl.style.color = '';
+                        errorEl.style.background = '';
+                        errorEl.style.padding = '';
+                    }
+                }, wasPending ? 2500 : 1200);
+            } catch (err) {
+                if (errorEl) {
+                    errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+                    errorEl.hidden = false;
+                }
+                submitBtn.textContent = 'Submit Tip to Heritage Board';
+                submitBtn.disabled = false;
+            }
+        };
+
+        form.addEventListener('submit', onSubmit);
+        cleanupFns.push(() => {
+            btn.removeEventListener('click', openModal);
+            closeBtn?.removeEventListener('click', closeModal);
+            modal.removeEventListener('click', onBackdrop);
+            form.removeEventListener('submit', onSubmit);
+        });
     };
 
     initRevealObserver();

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'auth.login'|trans }} | Tunisian Cuisine{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/auth-admin.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="auth-page" data-turbo="false">
+    <div class="auth-card">
+        <h1>{{ 'auth.login'|trans }}</h1>
+        <p style="color:#666;margin-bottom:1.5rem;">{{ 'auth.login_subtitle'|trans }}</p>
+
+        {% if error %}
+            <div class="flash flash-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <form method="post" action="{{ path('app_login_check') }}" data-turbo="false">
+            <div class="form-row">
+                <label for="username">{{ 'auth.email'|trans }}</label>
+                <input type="email" id="username" name="_username" value="{{ last_username }}" required autofocus autocomplete="username">
+            </div>
+            <div class="form-row">
+                <label for="password">{{ 'auth.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required autocomplete="current-password">
+            </div>
+            <div class="form-row form-check">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="_remember_me" value="on">
+                    Keep me logged in
+                </label>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" data-controller="csrf-protection">
+            <button type="submit" class="btn-primary-tc btn-block">{{ 'auth.login'|trans }}</button>
+        </form>
+
+        <p style="margin-top:1.5rem;text-align:center;">
+            {{ 'auth.no_account'|trans }} <a href="{{ path('app_register') }}">{{ 'auth.register'|trans }}</a>
+        </p>
+
+        <details style="margin-top:1.5rem;font-size:0.85rem;color:#666;">
+            <summary>Demo accounts</summary>
+            <ul style="margin:0.5rem 0 0 1rem;">
+                <li>Admin: admin@tunicuisine.local / admin123</li>
+                <li>User: user@tunicuisine.local / user1234</li>
+            </ul>
+        </details>
+    </div>
+</div>
+{% endblock %}
