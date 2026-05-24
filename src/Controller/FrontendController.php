@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Region;
-use App\Entity\Ingredient;
-use App\Repository\RegionRepository;
 use App\Repository\IngredientRepository;
+use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class FrontendController extends AbstractController
 {
-    #[Route('/', name: 'app_tips')]
+    #[Route('/tips', name: 'app_tips')]
     public function tips(): Response
     {
         return $this->render('frontend/tips.html.twig');
@@ -51,11 +49,5 @@ final class FrontendController extends AbstractController
             'ingredients' => $ingredients,
             'categories' => $categories,
         ]);
-    }
-
-    #[Route('/ask-chef', name: 'app_ask_chef')]
-    public function askChef(): Response
-    {
-        return $this->render('frontend/ask_chef.html.twig');
     }
 }

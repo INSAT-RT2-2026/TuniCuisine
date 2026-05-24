@@ -6,6 +6,7 @@ import { initTips } from './js/tips.js';
 import { initIngredients } from './js/ingredients.js';
 import { initAskChef } from './js/ask_chef.js';
 import { initRecipeDetail } from './js/recipe.js';
+import { initRecipes } from './js/recipes.js';
 
 function initPage() {
     if (document.querySelector('.philosophy-section') || document.querySelector('.masterclass-container')) {
@@ -17,7 +18,10 @@ function initPage() {
     if (document.querySelector('.ask-chef-section')) {
         initAskChef();
     }
-    if (document.querySelector('.recipe-detail-section')) {
+    if (document.querySelector('.recipes-page')) {
+        initRecipes();
+    }
+    if (document.querySelector('.recipe-detail-page')) {
         initRecipeDetail();
     }
 }

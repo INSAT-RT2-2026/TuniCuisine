@@ -14,10 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RecipeController extends AbstractController
 {
-    #[Route('/recipes', name: 'app_recipes')]
+    #[Route('/', name: 'app_home')]
     public function index(Request $request, RecipeRepository $recipeRepository, RegionRepository $regionRepository): Response
     {
-        $query = $request->query->get('q', '');
+        $query = trim((string) $request->query->get('q', ''));
         $regionId = $request->query->getInt('region', 0);
 
         if ($query !== '') {
@@ -36,7 +36,7 @@ final class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipes/{id}', name: 'app_recipe_show')]
+    #[Route('/recipes/{id}', name: 'app_recipe_show', requirements: ['id' => '\d+'])]
     public function show(Recipe $recipe): Response
     {
         return $this->render('frontend/recipe_detail.html.twig', [

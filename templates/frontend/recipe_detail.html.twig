@@ -2,88 +2,90 @@
 
 {% block title %}{{ recipe.name }} | Tunisian Cuisine{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/recipes.css') }}">
+{% endblock %}
+
 {% block body %}
-<section class="hero" style="background-image: url('{{ recipe.image ?? 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80' }}'); height: 450px;">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <div class="hero-icon">
-            <i class="fa-solid fa-utensils" style="color: #fff;"></i>
+<div class="recipes-page recipe-detail-page">
+    <header class="recipes-hero">
+        {% set imgSrc = recipe_image(recipe) %}
+        <div class="recipes-hero-bg" style="background-image: url('{{ imgSrc starts with 'http' ? imgSrc : asset(imgSrc) }}');"></div>
+        <div class="recipes-hero-overlay"></div>
+        <div class="recipes-hero-content">
+            <h1>{{ recipe.name }}</h1>
+            {% if recipe.region %}
+                <p class="hero-tagline"><i class="fa-solid fa-location-dot"></i> {{ recipe.region.name }}, Tunisia</p>
+            {% endif %}
+            {% if recipe.difficulty %}
+                <span class="recipe-difficulty {{ recipe.difficulty|lower }}" style="position:relative;margin-top:0.5rem;">{{ recipe.difficulty }}</span>
+            {% endif %}
         </div>
-        <h1>{{ recipe.name }}</h1>
-        {% if recipe.region %}
-            <p>{{ recipe.region.name }}</p>
-        {% endif %}
-    </div>
-</section>
+    </header>
 
-<section class="recipe-detail-section">
-    <div class="container recipe-detail-container">
-        <!-- Recipe Meta -->
-        <div class="recipe-meta-bar">
-            <div class="meta-item">
-                <i class="fa-regular fa-clock"></i>
-                <span><strong>{{ recipe.prepTime + recipe.cookTime }}</strong> min total</span>
-            </div>
-            <div class="meta-item">
-                <i class="fa-solid fa-stopwatch"></i>
-                <span>Prep <strong>{{ recipe.prepTime }}</strong> min</span>
-            </div>
-            <div class="meta-item">
-                <i class="fa-solid fa-fire-burner"></i>
-                <span>Cook <strong>{{ recipe.cookTime }}</strong> min</span>
-            </div>
-            <div class="meta-item">
-                <i class="fa-solid fa-user-group"></i>
-                <span><strong>{{ recipe.servings }}</strong> servings</span>
-            </div>
-            <div class="meta-item">
-                <i class="fa-solid fa-gauge-high"></i>
-                <span><strong>{{ recipe.difficulty }}</strong></span>
-            </div>
-        </div>
+    <main class="recipes-main">
+        <div class="container">
+            <a href="{{ path('app_home') }}" class="recipe-back-link"><i class="fa-solid fa-arrow-left"></i> Back to recipes</a>
 
-        <div class="recipe-detail-grid">
-            <!-- Ingredients -->
-            <div class="ingredients-panel">
-                <div class="panel-header">
-                    <div class="detail-line"></div>
+            <div class="recipe-detail-meta">
+                <div class="recipe-detail-meta-item">
+                    <i class="fa-regular fa-clock"></i>
+                    <div>
+                        <div class="label">Prep Time</div>
+                        <div>{{ recipe.prepTime ?? '—' }} min</div>
+                    </div>
+                </div>
+                <div class="recipe-detail-meta-item">
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <div>
+                        <div class="label">Cook Time</div>
+                        <div>{{ recipe.cookTime ?? '—' }} min</div>
+                    </div>
+                </div>
+                <div class="recipe-detail-meta-item">
+                    <i class="fa-solid fa-user-group"></i>
+                    <div>
+                        <div class="label">Servings</div>
+                        <div>{{ recipe.servings ?? '—' }} people</div>
+                    </div>
+                </div>
+            </div>
+
+            {% if recipe.description %}
+                <p style="color:var(--rc-muted-fg);line-height:1.7;margin-bottom:2rem;max-width:48rem;">{{ recipe.description }}</p>
+            {% endif %}
+
+            <div class="recipe-detail-grid">
+                <section class="recipe-panel">
                     <h2>Ingredients</h2>
-                </div>
-                <ul class="ingredients-list">
-                    {% for ri in recipe.recipeIngredients %}
-                        <li class="ingredient-item">
-                            <span class="ingredient-check"><i class="fa-regular fa-circle"></i></span>
-                            <span class="ingredient-name">{{ ri.ingredient.name }}</span>
-                            <span class="ingredient-qty">{{ ri.quantity }} {{ ri.unit }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <ul class="recipe-ingredients-list">
+                        {% for ri in recipe.recipeIngredients %}
+                            <li>
+                                <span>{{ ri.ingredient.name }}{% if ri.quantity %} — {{ ri.quantity }}{% if ri.unit %} {{ ri.unit }}{% endif %}{% endif %}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <section class="recipe-panel">
+                    <h2>Instructions</h2>
+                    <ol class="recipe-steps-list">
+                        {% for step in recipe.steps %}
+                            <li class="recipe-step">
+                                <span class="recipe-step-num">{{ step.stepOrder }}</span>
+                                <div>
+                                    <p>{{ step.description }}</p>
+                                    {% if step.tip %}
+                                        <div class="recipe-step-tip"><i class="fa-solid fa-lightbulb"></i>{{ step.tip }}</div>
+                                    {% endif %}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </section>
             </div>
 
-            <!-- Steps -->
-            <div class="steps-panel">
-                <div class="panel-header">
-                    <div class="detail-line"></div>
-                    <h2>Preparation</h2>
-                </div>
-                <div class="steps-list">
-                    {% for step in recipe.steps %}
-                        <div class="step-item reveal" style="--delay: {{ 0.1 + (loop.index0 * 0.1) }}s">
-                            <div class="step-number">{{ step.stepOrder }}</div>
-                            <div class="step-content">
-                                <p>{{ step.description }}</p>
-                                {% if step.tip %}
-                                    <div class="step-tip">
-                                        <i class="fa-solid fa-lightbulb"></i>
-                                        <span>{{ step.tip }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
         </div>
-    </div>
-</section>
+    </main>
+</div>
 {% endblock %}

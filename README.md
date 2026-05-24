@@ -3,7 +3,7 @@
 Discover authentic Tunisian recipes from every corner of Tunisia – from the streets of Tunis to the shores of Djerba.  
 **TuniCuisine** is a university web project that will present traditional Tunisian meals, their ingredients and preparation steps, in a modern and simple website inspired by local colors and symbols (chachia, Tunisian doors, mosaics, couscous pots, etc.).
 
->  **Status:** Early stage – we are starting the project and the UI, backend and database are still in progress.
+>  **Status:** Symfony app with homepage (recipes), regions, ingredients, cooking tips, about, and Ask the Chef.
 
 ---
 
@@ -102,12 +102,38 @@ Planned roles:
 - Database & data modeling
 ---
 
-##  Project Status 
--  HTML/CSS structure in progress  
--  JavaScript interactions to be added  
--  Backend (PHP, Symfony)   
+## Run locally
 
-The README will be updated as soon as we add real pages, data and screenshots.
+Requirements: **PHP 8.4+**, Composer, SQLite (or PostgreSQL via Docker Compose).
+
+```bash
+composer install
+cp .env.dev .env   # or use the included .env with SQLite
+php bin/console doctrine:migrations:migrate --no-interaction
+php bin/console doctrine:fixtures:load --no-interaction
+symfony server:start
+# or: php -S localhost:8000 -t public
+```
+
+Open http://localhost:8000 — the **recipes page is the homepage**.
+
+## Recipe images
+
+Add photos under `public/images/recipes/` named by slug (lowercase, hyphens):
+
+| Recipe | Filename |
+|--------|----------|
+| Mloukhia | `mloukhia.jpg` |
+| Couscous Royal | `couscous-royal.jpg` |
+| Brik à l'Oeuf | `brik-a-l-oeuf.jpg` |
+| Lablabi | `lablabi.jpg` |
+| Makroudh | `makroudh.jpg` |
+
+## Project status
+
+- Homepage: recipes grid with search, region filters, favorites (browser storage)
+- Backend: Symfony 8, Doctrine, fixtures
+- Pages: About, Regions, Ingredients, Cooking Tips (`/tips`), Ask Chef
 
 ---
 

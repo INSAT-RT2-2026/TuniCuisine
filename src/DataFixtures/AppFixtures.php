@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
                 'cookTime' => 120,
                 'servings' => 6,
                 'description' => 'The crown jewel of Tunisian cuisine — steamed semolina topped with lamb, chicken, merguez, and a medley of vegetables in a rich, spiced broth. A Friday tradition in every Tunisian home.',
-                'image' => 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=800&q=80',
+                'image' => null,
                 'ingredients' => [
                     ['Semolina', '500', 'g'],
                     ['Olive Oil', '3', 'tbsp'],
@@ -103,7 +103,7 @@ class AppFixtures extends Fixture
                 'cookTime' => 5,
                 'servings' => 4,
                 'description' => 'A paper-thin malsouka wrapper folded around a runny egg, tuna, capers, and parsley, then deep-fried until shatteringly crisp. The ultimate Tunisian street food.',
-                'image' => 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80',
+                'image' => null,
                 'ingredients' => [
                     ['Malsouka', '4', 'sheets'],
                     ['Olive Oil', 'for frying', ''],
@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
                 'cookTime' => 45,
                 'servings' => 4,
                 'description' => 'Tunisia\'s most beloved street food — a hearty chickpea soup poured over chunks of day-old bread and topped with cumin, harissa, and a poached egg.',
-                'image' => 'https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80',
+                'image' => null,
                 'ingredients' => [
                     ['Chickpeas', '400', 'g'],
                     ['Caraway Seeds', '1', 'tbsp'],
@@ -148,7 +148,7 @@ class AppFixtures extends Fixture
                 'cookTime' => 300,
                 'servings' => 6,
                 'description' => 'A deeply loved Tunisian stew of jute mallow leaves cooked into a silky green sauce with lamb. The secret is patience — simmer it low and slow for up to five hours.',
-                'image' => 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80',
+                'image' => null,
                 'ingredients' => [
                     ['Olive Oil', '4', 'tbsp'],
                     ['Coriander', '1', 'bunch'],
@@ -171,7 +171,7 @@ class AppFixtures extends Fixture
                 'cookTime' => 30,
                 'servings' => 24,
                 'description' => 'A traditional date-filled semolina pastry from Kairouan, deep-fried and soaked in floral syrup. Considered the finest in all of Tunisia.',
-                'image' => 'https://images.unsplash.com/photo-1609127973307-2e7f89c7e530?w=800&q=80',
+                'image' => null,
                 'ingredients' => [
                     ['Semolina', '500', 'g'],
                     ['Dates', '300', 'g'],
