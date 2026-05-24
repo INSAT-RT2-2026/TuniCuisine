@@ -42,6 +42,13 @@ final class RecipeImageResolver
       }
     }
 
+    $legacyDir = $this->projectDir.'/public/images';
+    foreach (self::EXTENSIONS as $ext) {
+      if (is_file($legacyDir.'/'.$slug.'.'.$ext)) {
+        return '/images/'.$slug.'.'.$ext;
+      }
+    }
+
     $stored = $recipe->getImage();
     if ($stored !== null && $stored !== '') {
       if (str_starts_with($stored, 'http') || str_starts_with($stored, '/')) {
