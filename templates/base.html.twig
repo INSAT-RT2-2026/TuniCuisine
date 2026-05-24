@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="turbo-cache-control" content="no-cache">
     <title>{% block title %}Tunisian Cuisine{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,27 +23,81 @@
 </head>
 <body>
     {% set current_route = app.request.attributes.get('_route') %}
-    <nav class="navbar">
-        <div class="container navbar-content">
-            <a href="{{ path('app_home') }}" class="logo" style="text-decoration:none;color:inherit;">
-                <div class="logo-icon">
-                    <i class="fa-solid fa-bowl-food" style="color: var(--primary-red)"></i>
-                </div>
-                <div class="logo-text">
-                    <span class="logo-title">Tunisian Cuisine</span>
-                    <span class="logo-subtitle">المطبخ التونسي</span>
-                </div>
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="{{ path('app_home') }}" class="site-brand">
+                <span class="site-brand__icon"><i class="fa-solid fa-bowl-food"></i></span>
+                <span class="site-brand__text">
+                    <span class="site-brand__title">Tunisian Cuisine</span>
+                    <span class="site-brand__subtitle">المطبخ التونسي</span>
+                </span>
             </a>
-            <div class="nav-links">
-                <a href="{{ path('app_home') }}" class="{{ current_route == 'app_home' or current_route == 'app_recipe_show' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-utensils"></i> Recipes</a>
-                <a href="{{ path('app_about') }}" class="{{ current_route == 'app_about' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-circle-info"></i> About</a>
-                <a href="{{ path('app_regions') }}" class="{{ current_route == 'app_regions' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-location-dot"></i> Regions</a>
-                <a href="{{ path('app_ingredients') }}" class="{{ current_route == 'app_ingredients' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-leaf"></i> Ingredients</a>
-                <a href="{{ path('app_tips') }}" class="{{ current_route == 'app_tips' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-book-open"></i> Cooking Tips</a>
-                <a href="{{ path('app_ask_chef') }}" class="{{ current_route == 'app_ask_chef' ? 'nav-btn active' : '' }}"><i class="fa-solid fa-comment"></i> Ask Chef</a>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a href="{{ path('app_home') }}" class="site-nav__link {{ current_route in ['app_home', 'app_recipe_show'] ? 'is-active' : '' }}">Recipes</a>
+                <a href="{{ path('app_about') }}" class="site-nav__link {{ current_route == 'app_about' ? 'is-active' : '' }}">About</a>
+                <a href="{{ path('app_regions') }}" class="site-nav__link {{ current_route == 'app_regions' ? 'is-active' : '' }}">Regions</a>
+                <a href="{{ path('app_ingredients') }}" class="site-nav__link {{ current_route == 'app_ingredients' ? 'is-active' : '' }}">Ingredients</a>
+                <a href="{{ path('app_tips') }}" class="site-nav__link {{ current_route == 'app_tips' ? 'is-active' : '' }}">Tips</a>
+                <a href="{{ path('app_ask_chef') }}" class="site-nav__link {{ current_route == 'app_ask_chef' ? 'is-active' : '' }}">Ask Chef</a>
+            </nav>
+
+            <div class="site-header__actions">
+                {% if app.user %}
+                    <details class="account-menu">
+                        <summary class="account-menu__trigger">
+                            <span class="account-menu__avatar">{{ app.user.displayName|slice(0, 1) }}</span>
+                            <span class="account-menu__name">{{ app.user.displayName }}</span>
+                            <i class="fa-solid fa-chevron-down account-menu__chevron" aria-hidden="true"></i>
+                        </summary>
+                        <div class="account-menu__panel" role="menu">
+                            <a href="{{ path('app_recipe_new') }}" class="account-menu__item account-menu__item--primary" data-turbo="false">
+                                <i class="fa-solid fa-plus"></i> Add a recipe
+                            </a>
+                            <a href="{{ path('app_my_recipes') }}" class="account-menu__item" data-turbo="false">
+                                <i class="fa-solid fa-book"></i> My recipes
+                            </a>
+                            <a href="{{ path('app_home') }}#favorites" class="account-menu__item" data-turbo="false">
+                                <i class="fa-solid fa-heart"></i> My saved recipes
+                            </a>
+                            <a href="{{ path('app_notifications') }}" class="account-menu__item" data-turbo="false">
+                                <i class="fa-solid fa-bell"></i> Notifications
+                                {% set unread = unread_notifications_count() %}
+                                {% if unread > 0 %}<span class="account-menu__badge">{{ unread }}</span>{% endif %}
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="account-menu__divider"></div>
+                                <a href="{{ path('admin_dashboard') }}" class="account-menu__item account-menu__item--admin" data-turbo="false">
+                                    <i class="fa-solid fa-shield-halved"></i> Admin panel
+                                </a>
+                            {% endif %}
+                            <div class="account-menu__divider"></div>
+                            <a href="{{ path('app_logout') }}" class="account-menu__item account-menu__item--muted" data-turbo="false">
+                                <i class="fa-solid fa-right-from-bracket"></i> Log out
+                            </a>
+                        </div>
+                    </details>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="site-header__link" data-turbo="false">Log in</a>
+                    <a href="{{ path('app_register') }}" class="site-header__cta" data-turbo="false">Sign up</a>
+                {% endif %}
             </div>
+
+            <button type="button" class="site-header__menu-btn" aria-label="Open menu" aria-expanded="false" id="mobile-nav-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
-    </nav>
+    </header>
+
+    {% for label, messages in app.flashes %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash flash-{{ label == 'error' ? 'error' : 'success' }}">
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 
     {% block body %}{% endblock %}
 
@@ -63,19 +118,19 @@
             <div class="footer-col">
                 <h4>Popular Regions</h4>
                 <ul>
-                    <li>Tunis - Capital Classics</li>
-                    <li>Sfax - Coastal Delights</li>
-                    <li>Djerba - Island Specialties</li>
-                    <li>Kairouan - Traditional Sweets</li>
+                    <li><a href="{{ path('app_regions') }}#region-tunis">Tunis — Capital Classics</a></li>
+                    <li><a href="{{ path('app_regions') }}#region-sfax">Sfax — Coastal Delights</a></li>
+                    <li><a href="{{ path('app_regions') }}#region-djerba">Djerba — Island Specialties</a></li>
+                    <li><a href="{{ path('app_regions') }}#region-kairouan">Kairouan — Traditional Sweets</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Explore</h4>
                 <ul>
-                    <li>About Tunisian Cuisine</li>
-                    <li>Ingredient Glossary</li>
-                    <li>Cooking Tips & Techniques</li>
-                    <li>Ask the Chef</li>
+                    <li><a href="{{ path('app_about') }}">About Tunisian Cuisine</a></li>
+                    <li><a href="{{ path('app_ingredients') }}">Ingredient Glossary</a></li>
+                    <li><a href="{{ path('app_tips') }}">Cooking Tips &amp; Techniques</a></li>
+                    <li><a href="{{ path('app_ask_chef') }}">Ask the Chef</a></li>
                 </ul>
             </div>
         </div>

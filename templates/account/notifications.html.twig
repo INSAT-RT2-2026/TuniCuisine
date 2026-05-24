@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notifications | Tunisian Cuisine{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem;">
+        <div>
+            <h1>Notifications</h1>
+            <p>Updates about your recipes, tips, and moderation decisions.</p>
+        </div>
+        <form method="post" action="{{ path('app_notifications_read_all') }}">
+            <button type="submit" class="btn-secondary-tc">Mark all as read</button>
+        </form>
+    </header>
+
+    <div class="account-wrap">
+        {% for notification in notifications %}
+            <article class="pending-card" style="{% if not notification.isRead %}border-left:4px solid var(--primary-red,#c1272d);{% endif %}">
+                <h3 style="margin:0 0 0.35rem;">{{ notification.title }}</h3>
+                <p style="margin:0 0 0.5rem;line-height:1.5;">{{ notification.message }}</p>
+                <time style="color:var(--tc-muted);font-size:0.85rem;">{{ notification.createdAt|date('M j, Y · H:i') }}</time>
+                {% if notification.link %}
+                    <div class="pending-actions">
+                        <form method="post" action="{{ path('app_notification_read', {id: notification.id}) }}">
+                            <button type="submit" class="btn-primary-tc">Open</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </article>
+        {% else %}
+            <div class="tc-card"><p style="margin:0;">No notifications yet.</p></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

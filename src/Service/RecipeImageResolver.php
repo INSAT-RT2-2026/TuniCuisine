@@ -28,11 +28,23 @@ final class RecipeImageResolver
   }
 
   /**
-   * Resolves recipe image URL: local file in public/images/recipes/{slug}.{ext} first,
-   * then stored image URL, then a default placeholder.
+   * Resolves recipe image URL: uploaded/stored path first, then slug-based file, then placeholder.
    */
   public function resolve(Recipe $recipe): string
   {
+    $stored = $recipe->getImage();
+    if ($stored !== null && $stored !== '') {
+      $path = $this->normalizePublicPath($stored);
+      if (!preg_match('#^https?://#i', $path)) {
+        $file = $this->projectDir.'/public'.parse_url($path, PHP_URL_PATH);
+        if (is_file($file)) {
+          return $path;
+        }
+      } else {
+        return $path;
+      }
+    }
+
     $slug = $this->slugify($recipe->getName());
     $dir = $this->projectDir.'/public/images/recipes';
 
@@ -49,15 +61,19 @@ final class RecipeImageResolver
       }
     }
 
-    $stored = $recipe->getImage();
-    if ($stored !== null && $stored !== '') {
-      if (str_starts_with($stored, 'http') || str_starts_with($stored, '/')) {
-        return $stored;
-      }
+    return '/images/tunisian_cuisine_banner_1774909075250.png';
+  }
 
-      return '/images/recipes/'.$stored;
+  private function normalizePublicPath(string $stored): string
+  {
+    if (preg_match('#^https?://#i', $stored)) {
+      return $stored;
     }
 
-    return '/images/tunisian_cuisine_banner_1774909075250.png';
+    if (str_starts_with($stored, '/')) {
+      return $stored;
+    }
+
+    return '/'.$stored;
   }
 }

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pending tips | Admin{% endblock %}
+
+{% block body %}
+<div class="tc-page" data-turbo="false">
+    <header class="tc-page-header">
+        <h1>Pending cooking tips</h1>
+        <p><a href="{{ path('admin_dashboard') }}" style="color:var(--primary-red);">← Back to dashboard</a></p>
+    </header>
+
+    <div class="admin-wrap">
+        {% for tip in tips %}
+            <article class="pending-card">
+                <p style="margin:0 0 0.5rem;"><strong>{{ tip.authorName }}</strong></p>
+                <p style="margin:0;line-height:1.6;">{{ tip.content }}</p>
+                <div class="pending-actions">
+                    <form method="post" action="{{ path('admin_tip_approve', {id: tip.id}) }}">
+                        <button type="submit" class="btn-primary-tc">Approve</button>
+                    </form>
+                    <form method="post" action="{{ path('admin_tip_reject', {id: tip.id}) }}" style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
+                        <input type="text" name="reason" placeholder="Reason" required style="padding:0.65rem 0.85rem;border:1px solid var(--tc-border);border-radius:8px;font:inherit;">
+                        <button type="submit" class="btn-secondary-tc">Decline</button>
+                    </form>
+                </div>
+            </article>
+        {% else %}
+            <div class="tc-card"><p style="margin:0;">No pending tips.</p></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

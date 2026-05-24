@@ -9,13 +9,35 @@ use App\Entity\Recipe;
 use App\Entity\RecipeIngredient;
 use App\Entity\Region;
 use App\Entity\Step;
+use App\Entity\User;
+use App\Enum\RecipeStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
+
     public function load(ObjectManager $manager): void
     {
+        $admin = (new User())
+            ->setEmail('admin@tunicuisine.local')
+            ->setDisplayName('Chef Admin')
+            ->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->passwordHasher->hashPassword($admin, 'admin123'));
+        $manager->persist($admin);
+
+        $member = (new User())
+            ->setEmail('user@tunicuisine.local')
+            ->setDisplayName('Home Cook')
+            ->setRoles(['ROLE_USER']);
+        $member->setPassword($this->passwordHasher->hashPassword($member, 'user1234'));
+        $manager->persist($member);
+
         // ===== REGIONS =====
         $regionsData = [
             ['name' => 'Tunis', 'type' => 'Capital/Urban', 'subtitle' => 'Coastal capital with access to both Mediterranean seafood and inland ingredients', 'description' => 'The capital and largest city, Tunis is the culinary melting pot of Tunisia. Here you will find traditional dishes alongside French-influenced cafés and restaurants.', 'iconClass' => 'fa-solid fa-location-dot', 'image' => null, 'didYouKnow' => 'The medina of Tunis is a UNESCO World Heritage site with countless food stalls and traditional eateries'],
@@ -23,6 +45,10 @@ class AppFixtures extends Fixture
             ['name' => 'Sousse', 'type' => 'Coastal', 'subtitle' => 'Beautiful Mediterranean coastline with fertile agricultural surroundings', 'description' => 'A coastal city known as the "Pearl of the Sahel." Sousse combines beach resort culture with authentic Tunisian culinary traditions.', 'iconClass' => 'fa-solid fa-water', 'image' => null, 'didYouKnow' => 'The Sousse medina has ancient fortifications and traditional spice markets'],
             ['name' => 'Kairouan', 'type' => 'Desert/Oasis', 'subtitle' => 'Inland city in the central plains, known for date palm oases', 'description' => 'The fourth holiest city in Islam and the historical capital. Kairouan is famous for its traditional sweets and pastries.', 'iconClass' => 'fa-solid fa-tree', 'image' => null, 'didYouKnow' => 'Makroudh from Kairouan is considered the finest in all of Tunisia'],
             ['name' => 'Djerba', 'type' => 'Coastal', 'subtitle' => 'Island paradise with Mediterranean beaches and traditional agriculture', 'description' => 'An island in the Gulf of Gabès, Djerba has a unique multicultural heritage reflected in its distinctive cuisine.', 'iconClass' => 'fa-solid fa-water', 'image' => null, 'didYouKnow' => 'Djerba is home to one of the oldest Jewish communities in North Africa, influencing local cuisine'],
+            ['name' => 'Bizerte', 'type' => 'Coastal', 'subtitle' => 'Strategic port at the northern tip where the Mediterranean meets Lake Bizerte', 'description' => 'The northernmost city in Africa, Bizerte is a fishing port with strong seafood traditions and French colonial influence.', 'iconClass' => 'fa-solid fa-water', 'image' => null, 'didYouKnow' => 'Bizerte\'s old port is one of the most picturesque in North Africa'],
+            ['name' => 'Gabès', 'type' => 'Desert/Oasis', 'subtitle' => 'Unique coastal oasis where the desert meets the Mediterranean', 'description' => 'Known as the Gateway to the Sahara, Gabès is famous for its coastal oasis, dates, and spicy cuisine.', 'iconClass' => 'fa-solid fa-tree', 'image' => null, 'didYouKnow' => 'Gabès is one of the few places where you can see palm trees on the beach'],
+            ['name' => 'Nabeul', 'type' => 'Coastal', 'subtitle' => 'Fertile peninsula with citrus groves and proximity to the sea', 'description' => 'The capital of the Cap Bon peninsula, famous for pottery, citrus fruits, and harissa production.', 'iconClass' => 'fa-solid fa-water', 'image' => null, 'didYouKnow' => 'Nabeul produces much of Tunisia\'s famous harissa and is known for ceramic tagine pots'],
+            ['name' => 'Monastir', 'type' => 'Coastal', 'subtitle' => 'Beautiful beaches along the Sahel coast', 'description' => 'A coastal resort town with a blend of tourism and traditional fishing culture, birthplace of Tunisia\'s first president.', 'iconClass' => 'fa-solid fa-water', 'image' => null, 'didYouKnow' => 'The ribat of Monastir dates back to 796 AD and overlooks the fishing harbor'],
         ];
 
         $regions = [];
@@ -197,7 +223,10 @@ class AppFixtures extends Fixture
                 ->setCookTime($rData['cookTime'])
                 ->setServings($rData['servings'])
                 ->setDescription($rData['description'])
-                ->setImage($rData['image']);
+                ->setImage($rData['image'])
+                ->setStatus(RecipeStatus::Published)
+                ->setReviewedBy($admin)
+                ->setReviewedAt(new \DateTimeImmutable());
 
             foreach ($rData['ingredients'] as $ingData) {
                 $ri = new RecipeIngredient();

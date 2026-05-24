@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'auth.register'|trans }} | Tunisian Cuisine{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/auth-admin.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="auth-page" data-turbo="false">
+    <div class="auth-card">
+        <h1>{{ 'auth.register'|trans }}</h1>
+        <p style="color:var(--tc-muted);margin-bottom:1.5rem;">{{ 'auth.register_subtitle'|trans }}</p>
+
+        {{ form_start(registrationForm, { attr: { class: 'tc-form', 'data-turbo': 'false' } }) }}
+            {{ form_row(registrationForm.displayName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword.first) }}
+            {{ form_row(registrationForm.plainPassword.second) }}
+            <button type="submit" class="btn-primary-tc btn-block" style="margin-top:0.5rem;">{{ 'auth.register'|trans }}</button>
+        {{ form_end(registrationForm) }}
+
+        <p style="margin-top:1.5rem;text-align:center;">
+            <a href="{{ path('app_login') }}">{{ 'auth.have_account'|trans }}</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

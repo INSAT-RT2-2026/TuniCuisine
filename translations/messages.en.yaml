@@ -1,0 +1,12 @@
+auth.login: Log in
+auth.login_subtitle: Access your account to submit recipes and save favorites.
+auth.register: Create account
+auth.register_subtitle: Join the TuniCuisine community and share your family recipes.
+auth.email: Email
+auth.password: Password
+auth.no_account: No account yet?
+auth.have_account: Already have an account? Log in
+account.created: Account created. You can log in now.
+recipe.published: Recipe published successfully.
+recipe.submitted: Recipe submitted for admin review. You will be notified when it is approved.
+comment.pending: Comment submitted for review.
