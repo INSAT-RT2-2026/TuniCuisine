@@ -4,6 +4,9 @@ Discover authentic Tunisian recipes from every corner of Tunisia — from Tunis 
 
 **TuniCuisine** is a Symfony 8 web application: recipes, regions, ingredients, cooking tips, Ask the Chef chatbot, user accounts, moderation, favorites, ratings, and comments.
 
+Our website serves as a digital cookbook and cultural guide, bridging the gap between traditional Tunisian kitchens and modern home cooks worldwide.  
+Whether you're discovering Tunisian cuisine for the first time or reconnecting with cherished family recipes, TuniCuisine guides your culinary journey with authentic recipes and cooking techniques.
+
 ---
 
 ## Quick start (Windows)
@@ -17,20 +20,62 @@ Full requirements, troubleshooting, and demo accounts: **[SETUP.md](SETUP.md)**
 
 ---
 
-## Team
+##  Features
 
-RT2 web development course — Ahmed Ben Salah, Mohamed Aziz Abbes, Yassin Amri, Salem Bouchahwa, Anas Abd Elmalek Cherif.
+-  **Authentic Tunisian Recipes:** Discover, browse, and cook traditional dishes.
+-  **Cooking Techniques:** Step-by-step instructions and tips for success.
+-  **Cultural Insights:** Learn the stories and heritage behind every meal.
+-  **Recipe Search & Filter:** Find your perfect recipe by category, ingredients, or difficulty.
+-  **User Accounts:** Save favorites and contribute your own recipes!
+-  **Responsive Design:** Enjoy a seamless experience on desktop and mobile.
 
 ---
 
-## Features
+## 🛠️ Built With
 
-- Recipe catalog with search and region filters
-- Recipe detail: ingredients, steps, ratings, comments
-- Member recipe submission with admin moderation
-- Cooking tips (grandmother’s wisdom + community board)
-- Ask the Chef (rule-based assistant)
-- Admin dashboard: pending recipes, tips, comments
-- EN / FR / AR UI translations
+- **PHP (51.2%)** – Backend logic & structure
+- **Twig (20.2%)** – Templating for clean, maintainable UI
+- **CSS (19.4%)** – Custom styles for a rich user experience
+- **JavaScript (8.7%)** – Interactivity and enhancements
+- **Batchfile (0.5%)** – Dev environment automation
 
-Demo logins are listed in [SETUP.md](SETUP.md).
+We use only **PHP / HTML / CSS / JavaScript / Symfony**.
+
+---
+
+## Team
+
+- Ahmed Ben Salah
+- Mohamed Aziz Abbes
+- Salem Bouchahouia
+- Yassine Amri
+- Anas Abd Elmalek Cherif
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from everyone!
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -am "Add your feature"`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See **LICENSE** for more information.
+
+---
+
+## 🙋‍♀️ Support & Contact
+
+Questions, feedback, or suggestions?  
+Open an issue or contact the team.
+
+---
+
+Bon appétit! Explore, cook, and share the rich flavors of Tunisia with TuniCuisine.ETUP.md](SETUP.md).
